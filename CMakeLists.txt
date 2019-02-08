@@ -30,10 +30,10 @@ if (BUILD_DOC)
     endif (DOXYGEN_FOUND)
 endif (BUILD_DOC)
 
-add_library(NDNup_library STATIC
+add_library(NDNup STATIC
     src/ndnup.c
 )
 
-target_include_directories(NDNup_library PUBLIC
+target_include_directories(NDNup PUBLIC
     ${PROJECT_SOURCE_DIR}/include
 )
