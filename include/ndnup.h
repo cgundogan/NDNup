@@ -11,10 +11,31 @@
  * @brief       NDNup functions
  * @author      Cenk Gündoğan <cenk.guendogan@haw-hamburg.de>
  * @copyright   MIT License
- * @addtogroup  NDNup
+ * @addtogroup  NDNup Minimal Standalone NDN Packet Parser
  * @{
  */
-void test(void);
+
+#ifndef NDNUP_H
+#define NDNUP_H
+
+#include <stdint.h>
+
+/**
+ * @brief Type definition ofr `TLV-Type` and `TLV-Length` fields
+ */
+typedef uint32_t ndnup_tlfield;
+
+/**
+ * @brief       Encodes a TLV field
+ *
+ * @param[out]  out     output buffer
+ * @param[in]   field   number to encode
+ * @return      Number of bytes written to @p out
+ * @retval      0 on error
+ */
+uint8_t ndnup_encode_tlfield(uint8_t *out, ndnup_tlfield field);
+
+#endif /* NDNUP_H */
 
 /**
  * @}
