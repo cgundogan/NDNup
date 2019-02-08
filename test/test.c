@@ -8,7 +8,7 @@
 
 static const uint8_t buffer[128];
 
-static const ndnup_tlfield test_tlfield_encode_input_01 = 1;
+static ndnup_tlfield test_tlfield_encode_input_01 = 1;
 static const uint8_t test_tlfield_encode_expected_01[] = { 0x01 };
 
 void test_tlfield_01(void)
@@ -18,6 +18,7 @@ void test_tlfield_01(void)
     offset = ndnup_encode_tlfield(buffer, test_tlfield_encode_input_01);
 
     TEST_ASSERT_EQUAL_UINT(1, offset);
+    TEST_ASSERT_EQUAL_UINT8_ARRAY(test_tlfield_encode_expected_01, buffer, offset);
 }
 
 int main(void)

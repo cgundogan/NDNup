@@ -21,7 +21,7 @@
 #include <stdint.h>
 
 /**
- * @brief Type definition ofr `TLV-Type` and `TLV-Length` fields
+ * @brief Type definition for `TLV-Type` and `TLV-Length` fields
  */
 typedef uint32_t ndnup_tlfield;
 
