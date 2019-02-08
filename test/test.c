@@ -6,7 +6,7 @@
 #include "unity.h"
 #include "ndnup.h"
 
-static const uint8_t buffer[128];
+static uint8_t buffer[128];
 
 static ndnup_tlfield test_tlfield_encode_input_01 = 1;
 static const uint8_t test_tlfield_encode_expected_01[] = { 0x01 };
