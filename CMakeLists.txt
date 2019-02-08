@@ -37,3 +37,13 @@ add_library(NDNup STATIC
 target_include_directories(NDNup PUBLIC
     ${PROJECT_SOURCE_DIR}/include
 )
+
+include(CTest)
+if (BUILD_TESTING)
+    add_library(unity STATIC "Unity/src/unity.c")
+    target_include_directories(unity PUBLIC "Unity/src")
+
+    add_executable(unittest-ndnup "${CMAKE_CURRENT_SOURCE_DIR}/test/test.c")
+    target_link_libraries(unittest-ndnup unity NDNup)
+    add_test(ndnup-tests unittest-ndnup)
+endif (BUILD_TESTING)
