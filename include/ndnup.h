@@ -18,6 +18,7 @@
 #ifndef NDNUP_H
 #define NDNUP_H
 
+#include <stdio.h>
 #include <stdint.h>
 
 /**
@@ -33,7 +34,7 @@ typedef uint32_t ndnup_tlfield;
  * @return      Number of bytes written to @p out
  * @retval      0 on error
  */
-uint8_t ndnup_encode_tlfield(uint8_t *out, ndnup_tlfield field);
+size_t ndnup_encode_tlfield(uint8_t *out, ndnup_tlfield field);
 
 #endif /* NDNUP_H */
 
