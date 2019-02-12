@@ -24,7 +24,7 @@
 /**
  * @brief Type definition for `TLV-Type` and `TLV-Length` fields
  */
-typedef uint32_t ndnup_tlfield;
+typedef uint32_t ndnup_tlfield_t;
 
 /**
  * @brief       Encodes a TLV field
@@ -34,7 +34,17 @@ typedef uint32_t ndnup_tlfield;
  * @return      Number of bytes written to @p out
  * @retval      0 on error
  */
-size_t ndnup_encode_tlfield(uint8_t *out, ndnup_tlfield field);
+size_t ndnup_encode_tlfield(uint8_t *out, ndnup_tlfield_t field);
+
+/**
+ * @brief       Decodes a TLV field
+ *
+ * @param[in]   in     buffer to read from
+ * @param[out]  field  decoded TLV field
+ * @return      Number of bytes read from @p in
+ * @retval      0 on error
+ */
+size_t ndnup_decode_tlfield(uint8_t *in, ndnup_tlfield_t *field);
 
 #endif /* NDNUP_H */
 

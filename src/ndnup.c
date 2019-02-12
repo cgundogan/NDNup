@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "ndnup.h"
 
-size_t ndnup_encode_tlfield(uint8_t *out, ndnup_tlfield field)
+size_t ndnup_encode_tlfield(uint8_t *out, ndnup_tlfield_t field)
 {
     size_t offset = 0;
 
@@ -36,6 +36,49 @@ size_t ndnup_encode_tlfield(uint8_t *out, ndnup_tlfield field)
         out[7] = field & (0x000000000000FF00) >> 8;
         out[8] = field & (0x00000000000000FF) >> 0;
     }
+#endif
+
+    return offset;
+}
+
+size_t ndnup_decode_tlfield(uint8_t *in, ndnup_tlfield_t *field)
+{
+    size_t offset = 0;
+    ndnup_tlfield_t tmp = (ndnup_tlfield_t) *in;
+
+    if (tmp < 253) {
+        offset = 1;
+        *field = tmp;
+    }
+    else if (tmp == 253) {
+        offset = 3;
+        tmp =
+            (in[1] << 8) |
+            (in[2] << 0);
+        *field = tmp;
+    }
+    else if (tmp == 254) {
+        offset = 5;
+        tmp =
+            (in[1] << 24) |
+            (in[2] << 16) |
+            (in[3] << 8) |
+            (in[4] << 0);
+        *field = tmp;
+    }
+#ifdef NDN_64BIT
+    else if (tmp == 255) {
+        offset = 9;
+        tmp =
+            (in[7] << 56) |
+            (in[6] << 48) |
+            (in[5] << 40) |
+            (in[4] << 32) |
+            (in[3] << 24) |
+            (in[2] << 16) |
+            (in[1] << 8) |
+            (in[0] << 0);
+        *field = tmp;
 #endif
 
     return offset;
