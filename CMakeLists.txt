@@ -31,7 +31,7 @@ if (BUILD_DOC)
 endif (BUILD_DOC)
 
 add_library(NDNup STATIC
-    src/ndnup.c
+    src/ndnup_tlfield.c
 )
 
 target_include_directories(NDNup PUBLIC

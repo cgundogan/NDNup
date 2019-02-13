@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "ndnup.h"
+#include "ndnup_tlfield.h"
 
 size_t ndnup_encode_tlfield(uint8_t *out, ndnup_tlfield_t field)
 {

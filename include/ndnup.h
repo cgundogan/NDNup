@@ -21,30 +21,7 @@
 #include <stdio.h>
 #include <stdint.h>
 
-/**
- * @brief Type definition for `TLV-Type` and `TLV-Length` fields
- */
-typedef uint32_t ndnup_tlfield_t;
-
-/**
- * @brief       Encodes a TLV field
- *
- * @param[out]  out     output buffer
- * @param[in]   field   number to encode
- * @return      Number of bytes written to @p out
- * @retval      0 on error
- */
-size_t ndnup_encode_tlfield(uint8_t *out, ndnup_tlfield_t field);
-
-/**
- * @brief       Decodes a TLV field
- *
- * @param[in]   in     buffer to read from
- * @param[out]  field  decoded TLV field
- * @return      Number of bytes read from @p in
- * @retval      0 on error
- */
-size_t ndnup_decode_tlfield(uint8_t *in, ndnup_tlfield_t *field);
+#include "ndnup_tlfield.h"
 
 #endif /* NDNUP_H */
 
