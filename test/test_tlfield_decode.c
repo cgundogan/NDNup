@@ -6,31 +6,53 @@
 #include "unity.h"
 #include "ndnup.h"
 
-void test_tlfield_decode_01(void)
+void test_tlfield_decode_1byte(void)
 {
-    uint8_t offset = 0;
+    int8_t error = 0;
     ndnup_tlfield_t tmp;
+    ndnup_buffer_t buf;
 
-    uint8_t input_01[] = { 0xFC };
-    ndnup_tlfield_t expected_01 = 252;
+    uint8_t input[] = {0xFC};
+    ndnup_tlfield_t expected = 0xFC;
 
-    offset = ndnup_decode_tlfield(input_01, &tmp);
-    TEST_ASSERT_EQUAL_UINT(1, offset);
-    TEST_ASSERT_EQUAL_INT64(expected_01, tmp);
+    ndnup_buffer_init(&buf, input, sizeof(input)/sizeof(input[0]));
 
+    error = ndnup_decode_tlfield(&buf, &tmp);
+    TEST_ASSERT_EQUAL_INT8(0, error);
+    TEST_ASSERT_EQUAL_UINT(1, buf.offset);
+    TEST_ASSERT_EQUAL_INT64(expected, tmp);
+}
 
-    uint8_t input_02[] = { 253, 0xFF, 0xFF };
-    ndnup_tlfield_t expected_02 = (1UL << 16) -1;
+void test_tlfield_decode_2byte(void)
+{
+    int8_t error = 0;
+    ndnup_tlfield_t tmp;
+    ndnup_buffer_t buf;
 
-    offset = ndnup_decode_tlfield(input_02, &tmp);
-    TEST_ASSERT_EQUAL_UINT(3, offset);
-    TEST_ASSERT_EQUAL_INT64(expected_02, tmp);
+    uint8_t input[] = { 253, 0xFF, 0xFF };
+    ndnup_tlfield_t expected = (1UL << 16) -1;
 
+    ndnup_buffer_init(&buf, input, sizeof(input)/sizeof(input[0]));
 
-    uint8_t input_03[] = { 254, 0xFF, 0xFF, 0xFF, 0xFF };
-    ndnup_tlfield_t expected_03 = (1UL << 32) -1;
+    error = ndnup_decode_tlfield(&buf, &tmp);
+    TEST_ASSERT_EQUAL_INT8(0, error);
+    TEST_ASSERT_EQUAL_UINT(3, buf.offset);
+    TEST_ASSERT_EQUAL_INT64(expected, tmp);
+}
 
-    offset = ndnup_decode_tlfield(input_03, &tmp);
-    TEST_ASSERT_EQUAL_UINT(5, offset);
-    TEST_ASSERT_EQUAL_INT64(expected_03, tmp);
+void test_tlfield_decode_4byte(void)
+{
+    int8_t error = 0;
+    ndnup_tlfield_t tmp;
+    ndnup_buffer_t buf;
+
+    uint8_t input[] = { 254, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF };
+    ndnup_tlfield_t expected = (1UL << 32) -1;
+
+    ndnup_buffer_init(&buf, input, sizeof(input)/sizeof(input[0]));
+
+    error = ndnup_decode_tlfield(&buf, &tmp);
+    TEST_ASSERT_EQUAL_INT8(0, error);
+    TEST_ASSERT_EQUAL_UINT(5, buf.offset);
+    TEST_ASSERT_EQUAL_INT64(expected, tmp);
 }

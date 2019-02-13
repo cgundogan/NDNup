@@ -7,14 +7,18 @@
 #include "ndnup.h"
 
 extern void test_tlfield_encode_01(void);
-extern void test_tlfield_decode_01(void);
+extern void test_tlfield_decode_1byte(void);
+extern void test_tlfield_decode_2byte(void);
+extern void test_tlfield_decode_4byte(void);
 
 int main(void)
 {
     UNITY_BEGIN();
 
     RUN_TEST(test_tlfield_encode_01);
-    RUN_TEST(test_tlfield_decode_01);
+    RUN_TEST(test_tlfield_decode_1byte);
+    RUN_TEST(test_tlfield_decode_2byte);
+    RUN_TEST(test_tlfield_decode_4byte);
 
     return UNITY_END();
 }

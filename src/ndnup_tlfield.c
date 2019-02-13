@@ -41,45 +41,45 @@ size_t ndnup_encode_tlfield(uint8_t *out, ndnup_tlfield_t field)
     return offset;
 }
 
-size_t ndnup_decode_tlfield(uint8_t *in, ndnup_tlfield_t *field)
+int8_t ndnup_decode_tlfield(ndnup_buffer_t *in, ndnup_tlfield_t *field)
 {
-    size_t offset = 0;
-    ndnup_tlfield_t tmp = (ndnup_tlfield_t) *in;
+    int8_t result = 0;
+    ndnup_tlfield_t tmp = (ndnup_tlfield_t) *in->buffer;
 
     if (tmp < 253) {
-        offset = 1;
+        in->offset += 1;
         *field = tmp;
     }
     else if (tmp == 253) {
-        offset = 3;
+        in->offset += 3;
         tmp =
-            (in[1] << 8) |
-            (in[2] << 0);
+            (in->buffer[1] << 8) |
+            (in->buffer[2] << 0);
         *field = tmp;
     }
     else if (tmp == 254) {
-        offset = 5;
+        in->offset += 5;
         tmp =
-            (in[1] << 24) |
-            (in[2] << 16) |
-            (in[3] << 8) |
-            (in[4] << 0);
+            (in->buffer[1] << 24) |
+            (in->buffer[2] << 16) |
+            (in->buffer[3] << 8) |
+            (in->buffer[4] << 0);
         *field = tmp;
     }
 #ifdef NDN_64BIT
     else if (tmp == 255) {
-        offset = 9;
+        in->offset += 9;
         tmp =
-            (in[7] << 56) |
-            (in[6] << 48) |
-            (in[5] << 40) |
-            (in[4] << 32) |
-            (in[3] << 24) |
-            (in[2] << 16) |
-            (in[1] << 8) |
-            (in[0] << 0);
+            (in->buffer[7] << 56) |
+            (in->buffer[6] << 48) |
+            (in->buffer[5] << 40) |
+            (in->buffer[4] << 32) |
+            (in->buffer[3] << 24) |
+            (in->buffer[2] << 16) |
+            (in->buffer[1] << 8) |
+            (in->buffer[0] << 0);
         *field = tmp;
 #endif
 
-    return offset;
+    return result;
 }

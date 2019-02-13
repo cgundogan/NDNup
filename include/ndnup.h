@@ -22,6 +22,7 @@
 #include <stdint.h>
 
 #include "ndnup_tlfield.h"
+#include "ndnup_buffer.h"
 
 #endif /* NDNUP_H */
 
