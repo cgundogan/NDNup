@@ -15,8 +15,8 @@
  * @{
  */
 
-#ifndef TLV_H
-#define TLV_H
+#ifndef NDN_UP_TLV_H
+#define NDN_UP_TLV_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -58,7 +58,7 @@ typedef enum tlv_type {
 }
 #endif
 
-#endif /* TLV_H */
+#endif /* NDN_UP_TLV_H */
 
 /**
  * @}
