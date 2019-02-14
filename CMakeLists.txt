@@ -32,6 +32,7 @@ endif (BUILD_DOC)
 
 add_library(NDNup STATIC
     src/ndnup_tlfield.c
+    src/ndnup_buffer.c
 )
 
 target_include_directories(NDNup PUBLIC

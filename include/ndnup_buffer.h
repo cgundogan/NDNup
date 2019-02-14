@@ -32,7 +32,7 @@ typedef struct {
  *
  * @param[out]  nbuf         ndnbuf_buffer_t to initialize
  * @param[in]   buffer       Pointer to the actual buffer
- * @param[in]   buffer_len   actual length of @p buffer
+ * @param[in]   buffer_len   Actual length of @p buffer
  */
 static inline void ndnup_buffer_init(ndnup_buffer_t *nbuf, uint8_t *buffer, size_t buffer_len)
 {
@@ -41,6 +41,24 @@ static inline void ndnup_buffer_init(ndnup_buffer_t *nbuf, uint8_t *buffer, size
     nbuf->offset = 0;
     return;
 }
+
+/**
+ * @brief       Returns the remaining bytes in @p nbuf
+ * @param[in]   nbuf         Buffer to calculate remaining bytes from
+ * @return      Remaining bytes in the buffer of @p nbuf
+ */
+static inline size_t ndnup_buffer_read_remaining(ndnup_buffer_t *nbuf)
+{
+    return (nbuf->length - nbuf->offset);
+}
+
+/**
+ * @brief       Reads from the buffer into @p out and advances ndnup_buffer_t::offset.
+ *
+ * @param[in]   nbuf         Buffer to read from
+ * @param[out]  out          Store read byte into @p out
+ */
+int8_t ndnup_buffer_read(ndnup_buffer_t *nbuf, uint8_t *out);
 
 #endif /* NDNUP_BUFFER_H */
 

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "ndnup_tlfield.h"
+#include "ndnup_buffer.h"
 
 size_t ndnup_encode_tlfield(uint8_t *out, ndnup_tlfield_t field)
 {
@@ -44,41 +45,68 @@ size_t ndnup_encode_tlfield(uint8_t *out, ndnup_tlfield_t field)
 int8_t ndnup_decode_tlfield(ndnup_buffer_t *in, ndnup_tlfield_t *field)
 {
     int8_t result = 0;
-    ndnup_tlfield_t tmp = (ndnup_tlfield_t) *in->buffer;
+    uint8_t tmp, tmp2;
+
+    if (0 > ndnup_buffer_read(in, &tmp)) {
+        return -1;
+    }
+
+    size_t remaining = ndnup_buffer_read_remaining(in);
 
     if (tmp < 253) {
-        in->offset += 1;
         *field = tmp;
     }
     else if (tmp == 253) {
-        in->offset += 3;
-        tmp =
-            (in->buffer[1] << 8) |
-            (in->buffer[2] << 0);
-        *field = tmp;
+        if (remaining >= 2) {
+            tmp = 0;
+            ndnup_buffer_read(in, &tmp2);
+            tmp |= tmp2 << 8;
+
+            ndnup_buffer_read(in, &tmp2);
+            tmp |= tmp2 << 0;
+
+            *field = tmp;
+        }
     }
     else if (tmp == 254) {
-        in->offset += 5;
-        tmp =
-            (in->buffer[1] << 24) |
-            (in->buffer[2] << 16) |
-            (in->buffer[3] << 8) |
-            (in->buffer[4] << 0);
-        *field = tmp;
+        if (remaining >= 4) {
+            tmp = 0;
+            ndnup_buffer_read(in, &tmp2);
+            tmp |= tmp2 << 24;
+            ndnup_buffer_read(in, &tmp2);
+            tmp |= tmp2 << 16;
+            ndnup_buffer_read(in, &tmp2);
+            tmp |= tmp2 << 8;
+            ndnup_buffer_read(in, &tmp2);
+            tmp |= tmp2 << 0;
+
+            *field = tmp;
+        }
     }
 #ifdef NDN_64BIT
     else if (tmp == 255) {
-        in->offset += 9;
-        tmp =
-            (in->buffer[7] << 56) |
-            (in->buffer[6] << 48) |
-            (in->buffer[5] << 40) |
-            (in->buffer[4] << 32) |
-            (in->buffer[3] << 24) |
-            (in->buffer[2] << 16) |
-            (in->buffer[1] << 8) |
-            (in->buffer[0] << 0);
-        *field = tmp;
+        if (remaining >= 8) {
+            tmp = 0;
+            ndnup_buffer_read(in, &tmp2);
+            tmp |= tmp2 << 56;
+            ndnup_buffer_read(in, &tmp2);
+            tmp |= tmp2 << 48;
+            ndnup_buffer_read(in, &tmp2);
+            tmp |= tmp2 << 40;
+            ndnup_buffer_read(in, &tmp2);
+            tmp |= tmp2 << 32;
+            ndnup_buffer_read(in, &tmp2);
+            tmp |= tmp2 << 24;
+            ndnup_buffer_read(in, &tmp2);
+            tmp |= tmp2 << 16;
+            ndnup_buffer_read(in, &tmp2);
+            tmp |= tmp2 << 8;
+            ndnup_buffer_read(in, &tmp2);
+            tmp |= tmp2 << 0;
+
+            *field = tmp;
+        }
+    }
 #endif
 
     return result;
