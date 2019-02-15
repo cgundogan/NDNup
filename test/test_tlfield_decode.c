@@ -17,7 +17,7 @@ void test_tlfield_decode_1byte(void)
 
     ndnup_buffer_init(&buf, input, sizeof(input)/sizeof(input[0]));
 
-    error = ndnup_decode_tlfield(&buf, &tmp);
+    error = ndnup_tlfield_decode(&buf, &tmp);
     TEST_ASSERT_EQUAL_INT8(0, error);
     TEST_ASSERT_EQUAL_UINT(1, buf.offset);
     TEST_ASSERT_EQUAL_INT64(expected, tmp);
@@ -34,7 +34,7 @@ void test_tlfield_decode_2byte(void)
 
     ndnup_buffer_init(&buf, input, sizeof(input)/sizeof(input[0]));
 
-    error = ndnup_decode_tlfield(&buf, &tmp);
+    error = ndnup_tlfield_decode(&buf, &tmp);
     TEST_ASSERT_EQUAL_INT8(0, error);
     TEST_ASSERT_EQUAL_UINT(3, buf.offset);
     TEST_ASSERT_EQUAL_INT64(expected, tmp);
@@ -51,7 +51,7 @@ void test_tlfield_decode_4byte(void)
 
     ndnup_buffer_init(&buf, input, sizeof(input)/sizeof(input[0]));
 
-    error = ndnup_decode_tlfield(&buf, &tmp);
+    error = ndnup_tlfield_decode(&buf, &tmp);
     TEST_ASSERT_EQUAL_INT8(0, error);
     TEST_ASSERT_EQUAL_UINT(5, buf.offset);
     TEST_ASSERT_EQUAL_INT64(expected, tmp);

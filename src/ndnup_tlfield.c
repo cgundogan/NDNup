@@ -2,7 +2,7 @@
 #include "ndnup_tlfield.h"
 #include "ndnup_buffer.h"
 
-int8_t ndnup_encode_tlfield(ndnup_buffer_write_t *out, ndnup_tlfield_t field)
+int8_t ndnup_tlfield_encode(ndnup_buffer_write_t *out, ndnup_tlfield_t field)
 {
     int8_t result = -1;
 
@@ -49,7 +49,7 @@ int8_t ndnup_encode_tlfield(ndnup_buffer_write_t *out, ndnup_tlfield_t field)
     return result;
 }
 
-int8_t ndnup_decode_tlfield(ndnup_buffer_read_t *in, ndnup_tlfield_t *field)
+int8_t ndnup_tlfield_decode(ndnup_buffer_read_t *in, ndnup_tlfield_t *field)
 {
     int8_t result = -1;
     ndnup_tlfield_t tlfield;
