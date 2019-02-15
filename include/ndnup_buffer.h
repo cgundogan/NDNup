@@ -21,11 +21,26 @@
 #include <stdio.h>
 #include <stdint.h>
 
+/**
+ * @brief       Buffer representation
+ * @{
+ */
 typedef struct {
-    uint8_t *buffer;
-    size_t length;
-    size_t offset;
+    uint8_t *buffer; /**< Pointer to the actual buffer */
+    size_t length;   /**< Maximum length of the buffer */
+    size_t offset;   /**< Current read/write offset within the buffer */
 } ndnup_buffer_t;
+/** @} */
+
+/**
+ * @brief       Buffer for reading
+ */
+typedef ndnup_buffer_t ndnup_buffer_read_t;
+
+/**
+ * @brief       Buffer for writing
+ */
+typedef ndnup_buffer_t ndnup_buffer_write_t;
 
 /**
  * @brief       Initializes a ndnup_buffer_t
@@ -47,18 +62,30 @@ static inline void ndnup_buffer_init(ndnup_buffer_t *nbuf, uint8_t *buffer, size
  * @param[in]   nbuf         Buffer to calculate remaining bytes from
  * @return      Remaining bytes in the buffer of @p nbuf
  */
-static inline size_t ndnup_buffer_read_remaining(ndnup_buffer_t *nbuf)
+static inline size_t ndnup_buffer_remaining(const ndnup_buffer_t *nbuf)
 {
     return (nbuf->length - nbuf->offset);
 }
 
 /**
- * @brief       Reads from the buffer into @p out and advances ndnup_buffer_t::offset.
+ * @brief       Reads from @p nbuf into @p out and advances ndnup_buffer_read_t::offset.
  *
  * @param[in]   nbuf         Buffer to read from
  * @param[out]  out          Store read byte into @p out
+ * @retval      0 on success
+ * @retval      -1 on end of buffer
  */
-int8_t ndnup_buffer_read(ndnup_buffer_t *nbuf, uint8_t *out);
+int8_t ndnup_buffer_read(ndnup_buffer_read_t *nbuf, uint8_t *out);
+
+/**
+ * @brief       Writes @p in into @p nbuf and advances ndnup_buffer_write_t::offset.
+ *
+ * @param[out] nbuf         Buffer to write into
+ * @param[in]  in           Value to write into @p nbuf
+ * @retval     0 on success
+ * @retval     -1 on end of buffer
+ */
+int8_t ndnup_buffer_write(ndnup_buffer_write_t *nbuf, uint8_t in);
 
 #endif /* NDNUP_BUFFER_H */
 

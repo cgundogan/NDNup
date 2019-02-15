@@ -34,9 +34,9 @@ typedef uint32_t ndnup_tlfield_t;
  * @param[out]  out     output buffer
  * @param[in]   field   number to encode
  * @return      Number of bytes written to @p out
- * @retval      0 on error
+ * @retval      0 on succes
  */
-size_t ndnup_encode_tlfield(uint8_t *out, ndnup_tlfield_t field);
+int8_t ndnup_encode_tlfield(ndnup_buffer_write_t *out, ndnup_tlfield_t field);
 
 /**
  * @brief       Decodes a TLV field
@@ -45,7 +45,7 @@ size_t ndnup_encode_tlfield(uint8_t *out, ndnup_tlfield_t field);
  * @param[out]  field  decoded TLV field
  * @retval      0 on success
  */
-int8_t ndnup_decode_tlfield(ndnup_buffer_t *in, ndnup_tlfield_t *field);
+int8_t ndnup_decode_tlfield(ndnup_buffer_read_t *in, ndnup_tlfield_t *field);
 
 #endif /* NDNUP_TLFFIELD_H */
 

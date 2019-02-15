@@ -16,3 +16,13 @@ int8_t ndnup_buffer_read(ndnup_buffer_t *nbuf, uint8_t *out)
     return 0;
 }
 
+int8_t ndnup_buffer_write(ndnup_buffer_t *nbuf, uint8_t in)
+{
+    if (nbuf->offset >= nbuf->length) {
+        return -1;
+    }
+
+    nbuf->buffer[nbuf->offset++] = in;
+
+    return 0;
+}

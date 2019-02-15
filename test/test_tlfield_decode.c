@@ -10,7 +10,7 @@ void test_tlfield_decode_1byte(void)
 {
     int8_t error = 0;
     ndnup_tlfield_t tmp;
-    ndnup_buffer_t buf;
+    ndnup_buffer_read_t buf;
 
     uint8_t input[] = {0xFC};
     ndnup_tlfield_t expected = 0xFC;

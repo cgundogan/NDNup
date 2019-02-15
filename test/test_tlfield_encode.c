@@ -6,29 +6,53 @@
 #include "unity.h"
 #include "ndnup.h"
 
-void test_tlfield_encode_01(void)
+void test_tlfield_encode_1byte(void)
 {
-    uint8_t test_buffer[16];
-    uint8_t offset = 0;
+    int8_t error = 0;
+    ndnup_tlfield_t field = 0xFC;
+    ndnup_buffer_write_t buf;
+    uint8_t buffer[1];
+    uint8_t expected[1] = { 0xFC };
 
-    ndnup_tlfield_t input_01 = 252;
-    uint8_t expected_01[] = { 0xFC };
+    ndnup_buffer_init(&buf, buffer, sizeof(buffer)/sizeof(buffer[0]));
 
-    offset = ndnup_encode_tlfield(test_buffer, input_01);
-    TEST_ASSERT_EQUAL_UINT(1, offset);
-    TEST_ASSERT_EQUAL_UINT8_ARRAY(expected_01, test_buffer, offset);
+    error = ndnup_encode_tlfield(&buf, field);
 
-    ndnup_tlfield_t input_02 = (1UL << 16) - 1;
-    uint8_t expected_02[] = { 253, 0xFF, 0xFF };
+    TEST_ASSERT_EQUAL_INT8(0, error);
+    TEST_ASSERT_EQUAL_UINT(1, buf.offset);
+    TEST_ASSERT_EQUAL_UINT8_ARRAY(expected, buf.buffer, buf.offset);
+}
 
-    offset = ndnup_encode_tlfield(test_buffer, input_02);
-    TEST_ASSERT_EQUAL_UINT(3, offset);
-    TEST_ASSERT_EQUAL_UINT8_ARRAY(expected_02, test_buffer, offset);
+void test_tlfield_encode_2byte(void)
+{
+    int8_t error = 0;
+    ndnup_tlfield_t field = (1UL << 16) -1;
+    ndnup_buffer_write_t buf;
+    uint8_t buffer[3];
+    uint8_t expected[3] = { 253, 0xFF, 0xFF };
 
-    ndnup_tlfield_t input_03 = (1UL << 32) - 1;
-    uint8_t expected_03[] = { 254, 0xFF, 0xFF, 0xFF, 0xFF };
+    ndnup_buffer_init(&buf, buffer, sizeof(buffer)/sizeof(buffer[0]));
 
-    offset = ndnup_encode_tlfield(test_buffer, input_03);
-    TEST_ASSERT_EQUAL_UINT(5, offset);
-    TEST_ASSERT_EQUAL_UINT8_ARRAY(expected_03, test_buffer, offset);
+    error = ndnup_encode_tlfield(&buf, field);
+
+    TEST_ASSERT_EQUAL_INT8(0, error);
+    TEST_ASSERT_EQUAL_UINT(3, buf.offset);
+    TEST_ASSERT_EQUAL_UINT8_ARRAY(expected, buf.buffer, buf.offset);
+}
+
+void test_tlfield_encode_4byte(void)
+{
+    int8_t error = 0;
+    ndnup_tlfield_t field = (1UL << 32) -1;
+    ndnup_buffer_write_t buf;
+    uint8_t buffer[5];
+    uint8_t expected[5] = { 254, 0xFF, 0xFF, 0xFF, 0xFF };
+
+    ndnup_buffer_init(&buf, buffer, sizeof(buffer)/sizeof(buffer[0]));
+
+    error = ndnup_encode_tlfield(&buf, field);
+
+    TEST_ASSERT_EQUAL_INT8(0, error);
+    TEST_ASSERT_EQUAL_UINT(5, buf.offset);
+    TEST_ASSERT_EQUAL_UINT8_ARRAY(expected, buf.buffer, buf.offset);
 }
