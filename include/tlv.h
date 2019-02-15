@@ -18,6 +18,14 @@
 #ifndef NDNUP_TLV_H
 #define NDNUP_TLV_H
 
+#ifndef NDN_TLV_MAJOR_VERSION
+#define NDN_TLV_MAJOR_VERSION 0
+#endif
+
+#ifndef NDN_TLV_MINOR_VERSION
+#define NDN_TLV_MINOR_VERSION 3
+#endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif
