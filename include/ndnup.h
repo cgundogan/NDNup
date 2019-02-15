@@ -23,6 +23,7 @@
 
 #include "ndnup_tlfield.h"
 #include "ndnup_buffer.h"
+#include "ndnup_interest.h"
 
 #endif /* NDNUP_H */
 

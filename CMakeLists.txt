@@ -33,6 +33,7 @@ endif (BUILD_DOC)
 add_library(NDNup STATIC
     src/ndnup_tlfield.c
     src/ndnup_buffer.c
+    src/ndnup_interest_encode.c
 )
 
 target_include_directories(NDNup PUBLIC
@@ -48,6 +49,7 @@ if (BUILD_TESTING)
         "${CMAKE_CURRENT_SOURCE_DIR}/test/test.c"
         "${CMAKE_CURRENT_SOURCE_DIR}/test/test_tlfield_encode.c"
         "${CMAKE_CURRENT_SOURCE_DIR}/test/test_tlfield_decode.c"
+        "${CMAKE_CURRENT_SOURCE_DIR}/test/test_interest_encode.c"
         )
     target_link_libraries(unittest-ndnup unity NDNup)
     add_test(ndnup-tests unittest-ndnup)
