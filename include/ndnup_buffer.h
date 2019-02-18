@@ -87,6 +87,26 @@ int8_t ndnup_buffer_read(ndnup_buffer_read_t *nbuf, uint8_t *out);
  */
 int8_t ndnup_buffer_write(ndnup_buffer_write_t *nbuf, uint8_t in);
 
+/**
+ * @brief       Writes @p block in @p nbuf and advances ndnup_buffer_write_t::offset by @p block_len.
+ *
+ * @param[in,out] nbuf         Buffer to write into
+ * @param[in]     block        Block to write to @p nbuf
+ * @retval        0 on success
+ * @retval        -1 on end of buffer
+ */
+int8_t ndnup_buffer_write_block(ndnup_buffer_write_t *nbuf, uint8_t *block, size_t block_len);
+
+/**
+ * @brief       Reads a block from @p nbuf into @p block and advances ndnup_buffer_read_t::offset by @p block_len.
+ *
+ * @param[in,out]   nbuf         Buffer to read from
+ * @param[out]      block        Store read block to @p block
+ * @retval          0 on success
+ * @retval          -1 on end of buffer
+ */
+int8_t ndnup_buffer_read_block(ndnup_buffer_read_t *nbuf, uint8_t *block, size_t block_len);
+
 #endif /* NDNUP_BUFFER_H */
 
 /**
