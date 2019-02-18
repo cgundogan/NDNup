@@ -42,6 +42,18 @@ typedef struct ndn_name {
   uint32_t components_size;
 } ndn_name_t;
 
+
+static size_t get_name_block_size(const ndn_name_t* name)
+{
+    size_t result = 0;
+
+    for (uint32_t i = 0; i < name->components_size; i++) {
+        result += get_component_block_size(&(name->components[i]));
+    }
+
+    return result;
+};
+
 #ifdef __cplusplus
 }
 #endif

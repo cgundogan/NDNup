@@ -71,20 +71,17 @@ extern "C" {
  *
  */
 typedef struct ndn_component {
-   uint32_t type;                                 /**< the type of the component */
+   ndnup_tlfield_t type;                          /**< the type of the component */
    uint8_t value[NDN_NAME_COMPONENT_BUFFER_SIZE]; /**< the actual value the component holds */
    uint32_t size;                                 /**< the actual size of the component buffer */
 } ndn_component_t;
 
-/**
- *
- */
-typedef struct ndn_name_component_block {
-  uint8_t value[NDN_NAME_COMPONENT_BLOCK_SIZE];   /**< the name component type-length-value block */
-  uint32_t size;                                  /**< the size of the name component */
-} ndn_name_component_block_t;
-
-
+static size_t get_component_block_size(ndn_component_t *component)
+{
+    size_t result = 0;
+    // FIXME
+    return result;
+};
 
 #ifdef __cplusplus
 }
