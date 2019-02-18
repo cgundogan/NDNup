@@ -7,7 +7,7 @@
 int8_t ndnup_interest_encode(ndnup_buffer_write_t *out, ndnup_interest_t *intmsg)
 {
     int8_t result = -1;
-    const enum tlv_type outertlv = interest;
+    const enum tlv_type outertlv = tlv_interest;
 
     /* write outer TLV */
     ndnup_tlfield_encode(out, outertlv);
