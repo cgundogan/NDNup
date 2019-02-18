@@ -14,6 +14,7 @@
  * @addtogroup  NDNup Minimal Standalone NDN Packet Parser
  * @{
  */
+
 #ifndef COMPONENT_H
 #define COMPONENT_H
 
