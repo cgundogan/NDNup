@@ -15,14 +15,15 @@
  * @{
  */
 
+#ifndef INTEREST_H 
+#define INTEREST_H
 
 #include <stdint.h>
+#include <string.h>
 
 #include "name.h"
 #include "constants.h"
-
-#ifndef INTEREST_H 
-#define INTEREST_H
+#include "ndnup_buffer.h"
 
 #ifndef INTEREST_DEFAULT_LIFETIME
 #define INTEREST_DEFAULT_LIFETIME (4000u)
@@ -36,7 +37,7 @@ extern "C" {
  * The structure to represent the Interest parameters element.
  */
 typedef struct interest_params {
-  uint8_t value[NDN_INTEREST_PARAMS_BUFFER_SIZE];
+  uint8_t value[NDN_INTEREST_PARAMETERS_BUFFER_SIZE];
   uint32_t size;
 } interest_params_t;
 
@@ -54,6 +55,7 @@ typedef struct ndn_interest {
   uint8_t parameters_enabled;    /**< indicates if parameters field is set */
 
   uint8_t hop_limit;             /**< hop limit */
+  uint8_t hop_limit_enabled;     /**< indicates if field \ref hop_limit is set */
 } ndn_interest_t;
 
 
@@ -74,7 +76,7 @@ static inline void interest_create(ndn_interest_t *interest)
  * @retval      -1 output buffer @p out was NULL
  * @retval      -2 interest @p intmsg was NULL
  */
-int8_t interest_encode(ndnup_buffer_write_t *out, interest_t *intmsg);
+int8_t interest_encode(ndnup_buffer_write_t *out, ndn_interest_t *intmsg);
 
 #ifdef __cplusplus
 }

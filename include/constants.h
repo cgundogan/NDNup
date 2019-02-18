@@ -21,19 +21,33 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+/**
+ * 
+ */
+#ifndef NDN_NAME_COMPONENTS_SIZE 
+#define NDN_NAME_COMPONENTS_SIZE            (10u)
+#endif 
+
+/**
+ * 
+ */
+#ifndef NDN_INTEREST_PARAMETERS_BUFFER_SIZE
+#define NDN_INTEREST_PARAMETERS_BUFFER_SIZE (248u)
+#endif 
         
 /**
  * 
  */
 #ifndef NDN_NAME_COMPONENT_BUFFER_SIZE
-#define NDN_NAME_COMPONENT_BUFFER_SIZE (36u)
+#define NDN_NAME_COMPONENT_BUFFER_SIZE      (36u)
 #endif 
 
 /**
  * 
  */
 #ifndef NDN_NAME_COMPONENT_BLOCK_SIZE
-#define NDN_NAME_COMPONENT_BLOCK_SIZE (38u)
+#define NDN_NAME_COMPONENT_BLOCK_SIZE       (38u)
 #endif 
 
 #ifdef __cplusplus

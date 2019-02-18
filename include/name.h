@@ -35,7 +35,7 @@ typedef struct ndn_name {
   /**
    * The array of name components contained in this name (not including T and L)
    */
-  name_component_t components[NDN_NAME_COMPONENTS_SIZE];
+  ndn_component_t components[NDN_NAME_COMPONENTS_SIZE];
   /**
    * The number of name components
    */

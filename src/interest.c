@@ -1,14 +1,16 @@
+#include "tlv.h"
+#include "ndnup_tlfield.h"
 #include "interest.h"
 
 
-int8_t interest_encode(ndnup_buffer_write_t *out, interest_t *interest)
+int8_t interest_encode(ndnup_buffer_write_t *out, ndn_interest_t *interest)
 {
     int8_t result = -1;
 
     if (out) {
         result = -2; 
 
-        if (intmsg) {
+        if (interest) {
             /* FIXME */
             int size = 1;
 
@@ -50,7 +52,7 @@ int8_t interest_encode(ndnup_buffer_write_t *out, interest_t *interest)
             /** write parameters */
             if (interest->parameters_enabled) {
                 ndnup_tlfield_encode(out, tlv_parameters);
-                ndnup_tlfield_encode(out, interest->parameters->size);
+                ndnup_tlfield_encode(out, interest->parameters.size);
 
             }
 
