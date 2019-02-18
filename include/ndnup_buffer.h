@@ -45,9 +45,9 @@ typedef ndnup_buffer_t ndnup_buffer_write_t;
 /**
  * @brief       Initializes a ndnup_buffer_t
  *
- * @param[out]  nbuf         ndnbuf_buffer_t to initialize
- * @param[in]   buffer       Pointer to the actual buffer
- * @param[in]   buffer_len   Actual length of @p buffer
+ * @param[in,out]  nbuf         ndnbuf_buffer_t to initialize
+ * @param[in]      buffer       Pointer to the actual buffer
+ * @param[in]      buffer_len   Actual length of @p buffer
  */
 static inline void ndnup_buffer_init(ndnup_buffer_t *nbuf, uint8_t *buffer, size_t buffer_len)
 {
@@ -58,9 +58,9 @@ static inline void ndnup_buffer_init(ndnup_buffer_t *nbuf, uint8_t *buffer, size
 }
 
 /**
- * @brief       Returns the remaining bytes in @p nbuf
- * @param[in]   nbuf         Buffer to calculate remaining bytes from
- * @return      Remaining bytes in the buffer of @p nbuf
+ * @brief           Returns the remaining bytes in @p nbuf
+ * @param[in,out]   nbuf         Buffer to calculate remaining bytes from
+ * @return          Remaining bytes in the buffer of @p nbuf
  */
 static inline size_t ndnup_buffer_remaining(const ndnup_buffer_t *nbuf)
 {
@@ -70,20 +70,20 @@ static inline size_t ndnup_buffer_remaining(const ndnup_buffer_t *nbuf)
 /**
  * @brief       Reads from @p nbuf into @p out and advances ndnup_buffer_read_t::offset.
  *
- * @param[in]   nbuf         Buffer to read from
- * @param[out]  out          Store read byte into @p out
- * @retval      0 on success
- * @retval      -1 on end of buffer
+ * @param[in,out]   nbuf         Buffer to read from
+ * @param[out]      out          Store read byte into @p out
+ * @retval          0 on success
+ * @retval          -1 on end of buffer
  */
 int8_t ndnup_buffer_read(ndnup_buffer_read_t *nbuf, uint8_t *out);
 
 /**
  * @brief       Writes @p in into @p nbuf and advances ndnup_buffer_write_t::offset.
  *
- * @param[out] nbuf         Buffer to write into
- * @param[in]  in           Value to write into @p nbuf
- * @retval     0 on success
- * @retval     -1 on end of buffer
+ * @param[in,out] nbuf         Buffer to write into
+ * @param[in]     in           Value to write into @p nbuf
+ * @retval        0 on success
+ * @retval        -1 on end of buffer
  */
 int8_t ndnup_buffer_write(ndnup_buffer_write_t *nbuf, uint8_t in);
 

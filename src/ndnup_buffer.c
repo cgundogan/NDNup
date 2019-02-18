@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "ndnup_buffer.h"
 
-int8_t ndnup_buffer_read(ndnup_buffer_t *nbuf, uint8_t *out)
+int8_t ndnup_buffer_read(ndnup_buffer_read_t *nbuf, uint8_t *out)
 {
     uint8_t result;
 
@@ -16,7 +16,7 @@ int8_t ndnup_buffer_read(ndnup_buffer_t *nbuf, uint8_t *out)
     return 0;
 }
 
-int8_t ndnup_buffer_write(ndnup_buffer_t *nbuf, uint8_t in)
+int8_t ndnup_buffer_write(ndnup_buffer_write_t *nbuf, uint8_t in)
 {
     if (nbuf->offset >= nbuf->length) {
         return -1;
