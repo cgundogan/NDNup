@@ -10,9 +10,9 @@ int8_t ndnup_interest_encode(ndnup_buffer_write_t *out, ndnup_interest_t *intmsg
     const enum tlv_type outertlv = tlv_interest;
 
     /* write outer TLV */
-    ndnup_tlfield_encode(out, outertlv);
+    tlfield_encode(out, outertlv);
     /* for now length 0 */
-    ndnup_tlfield_encode(out, 0x00);
+    tlfield_encode(out, 0x00);
 
     /* for now no errors */
     result = 0;

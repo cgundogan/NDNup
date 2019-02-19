@@ -21,7 +21,7 @@
 #include <stdio.h>
 #include <stdint.h>
 
-#include "ndnup_tlfield.h"
+#include "tlv.h"
 #include "ndnup_buffer.h"
 #include "ndnup_interest.h"
 

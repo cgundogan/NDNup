@@ -31,7 +31,8 @@ if (BUILD_DOC)
 endif (BUILD_DOC)
 
 add_library(NDNup STATIC
-    src/ndnup_tlfield.c
+    src/tlv_encode.c
+    src/tlv_decode.c
     src/ndnup_buffer.c
     src/interest.c
 )
@@ -47,8 +48,8 @@ if (BUILD_TESTING)
 
     add_executable(unittest-ndnup
         "${CMAKE_CURRENT_SOURCE_DIR}/test/test.c"
-        "${CMAKE_CURRENT_SOURCE_DIR}/test/test_tlfield_encode.c"
-        "${CMAKE_CURRENT_SOURCE_DIR}/test/test_tlfield_decode.c"
+        "${CMAKE_CURRENT_SOURCE_DIR}/test/test_tlv_encode.c"
+        "${CMAKE_CURRENT_SOURCE_DIR}/test/test_tlv_decode.c"
         "${CMAKE_CURRENT_SOURCE_DIR}/test/test_interest_encode.c"
         )
     target_link_libraries(unittest-ndnup unity NDNup)
