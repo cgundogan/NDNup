@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <string.h>
+
 #include "ndnup_buffer.h"
 
 int8_t ndnup_buffer_read(ndnup_buffer_read_t *nbuf, uint8_t *out)
