@@ -15,7 +15,7 @@ extern void test_tlfield_decode_2byte(void);
 extern void test_tlfield_decode_4byte(void);
 
 extern void test_interest_encode_simple(void);
-extern void test_interest_encode_cbp_mbf_hl(void);
+extern void test_interest_encode_cbp_mbf_il_hl(void);
 
 int main(void)
 {
@@ -30,7 +30,7 @@ int main(void)
     RUN_TEST(test_tlfield_decode_4byte);
 
     RUN_TEST(test_interest_encode_simple);
-    RUN_TEST(test_interest_encode_cbp_mbf_hl);
+    RUN_TEST(test_interest_encode_cbp_mbf_il_hl);
 
     return UNITY_END();
 }

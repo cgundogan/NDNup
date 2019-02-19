@@ -18,6 +18,18 @@ int8_t nonce_encode(ndnup_buffer_write_t *out, uint32_t nonce)
     return result;
 }
 
+int8_t interest_lifetime_encode(ndnup_buffer_write_t *out, uint32_t interest_lifetime)
+{
+    /* TODO add error checking */
+    int8_t result = 0;
+    uint8_t lifetime_len = get_nonnegative_int_size(interest_lifetime);
+
+    ndnup_tlfield_encode(out, tlv_interest_lifetime);
+    ndnup_tlfield_encode(out, lifetime_len);
+    nonnegative_int_encode(out, interest_lifetime);
+
+    return 0;
+}
 
 int8_t interest_encode(ndnup_buffer_write_t *out, ndn_interest_t *interest)
 {
@@ -38,37 +50,34 @@ int8_t interest_encode(ndnup_buffer_write_t *out, ndn_interest_t *interest)
             /* write name */
             name_encode(out, (const ndn_name_t *)&interest->name);
 
-            /** write 'can be prefix' */
+            /* write 'can be prefix' */
             if (interest->can_be_prefix_enabled) {
                 ndnup_tlfield_encode(out, tlv_can_be_prefix);
                 ndnup_tlfield_encode(out, 0);
             }
 
-            /** write 'must be fresh' */
+            /* write 'must be fresh' */
             if (interest->must_be_fresh_enabled) {
                 ndnup_tlfield_encode(out, tlv_must_be_fresh);
                 ndnup_tlfield_encode(out, 0);
             }
 
-            /** write nonce */
+            /* write nonce */
             nonce_encode(out, interest->nonce);
 
-            /** write interest lifetime */
+            /* write interest lifetime */
             if (interest->lifetime_enabled) {
-                ndnup_tlfield_encode(out, tlv_interest_lifetime);
-                ndnup_tlfield_encode(out, 2);
-
+                interest_lifetime_encode(out, interest->lifetime);
             }
 
-
-            /** write hop limit */
+            /* write hop limit */
             if (interest->hop_limit_enabled) {
                 ndnup_tlfield_encode(out, tlv_hop_limit);
                 ndnup_tlfield_encode(out, 1);
                 ndnup_buffer_write(out, interest->hop_limit);
             }
 
-            /** write parameters */
+            /* write parameters */
             if (interest->parameters_enabled) {
                 ndnup_tlfield_encode(out, tlv_parameters);
                 ndnup_tlfield_encode(out, interest->parameters.size);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 Safety IO 
+ * Copyright (C) 2019 Safety IO
  *
  * This file is subject to the terms and conditions of the GNU Lesser
  * General Public License v2.1. See the file LICENSE in the top level
@@ -15,7 +15,7 @@
  * @{
  */
 
-#ifndef INTEREST_H 
+#ifndef INTEREST_H
 #define INTEREST_H
 
 #include <stdint.h>
@@ -29,7 +29,7 @@
 
 #ifndef INTEREST_DEFAULT_LIFETIME
 #define INTEREST_DEFAULT_LIFETIME (4000u)
-#endif 
+#endif
 
 #ifdef __cplusplus
 extern "C" {
@@ -50,7 +50,7 @@ typedef struct ndn_interest {
   ndn_name_t name;               /**< name of the interest */
 
   uint32_t nonce;                /**< nonce of the interest */
-  uint64_t lifetime;             /**< lifetime of the interest */
+  uint32_t lifetime;             /**< lifetime of the interest */
   uint8_t lifetime_enabled;      /**< indicates if the lifetime field is set*/
 
   uint8_t can_be_prefix;         /**< if present, the name element in the interest is a prefix, exact, or full name of the requested data packet */
@@ -78,29 +78,29 @@ static inline void interest_create(ndn_interest_t *interest)
 static size_t get_interest_size(const ndn_interest_t* interest)
 {
     size_t size = get_name_block_size(&(interest->name));
- 
+
     if (interest->can_be_prefix_enabled) {
         size += 2;
-    } 
- 
+    }
+
     if (interest->must_be_fresh_enabled){
         size += 2;
     }
 
-    if (interest->hop_limit_enabled) { 
+    if (interest->hop_limit_enabled) {
         size += 3;
-    } 
+    }
 
     if (interest->parameters_enabled) {
         size += get_block_size(tlv_parameters, interest->parameters.size);
-    } 
+    }
 
     /** size of nonce */
     size += 6;
 
     if (interest->lifetime_enabled) {
         /** size of lifetime */
-        size += 4;  
+        size += 2 + get_nonnegative_int_size(interest->lifetime);
     }
 
     return size;

@@ -15,6 +15,9 @@
  * @{
  */
 
+#ifndef NAME_H
+#define NAME_H
+
 #include <stdint.h>
 #include <stdlib.h>
 
@@ -23,9 +26,6 @@
 #include "constants.h"
 #include "component.h"
 #include "tlv.h"
-
-#ifndef NAME_H
-#define NAME_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -63,7 +63,7 @@ static void name_encode(ndnup_buffer_write_t *out, const ndn_name_t *name)
     ndnup_tlfield_encode(out, get_name_block_size(name) - 2);
 
     for (uint32_t i = 0; i < name->components_size; i++) {
-        ndn_component_t *comp = (ndn_name_t *) &(name->components[i]);
+        ndn_component_t *comp = (ndn_component_t *) &(name->components[i]);
         ndnup_tlfield_encode(out, comp->type);
         ndnup_tlfield_encode(out, comp->size);
         ndnup_buffer_write_block(out, comp->value, comp->size);
