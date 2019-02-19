@@ -21,6 +21,7 @@
 #include <limits.h>
 #include <stdint.h>
 
+#include "helper.h"
 #include "constants.h"
 
 #ifdef __cplusplus
@@ -76,11 +77,9 @@ typedef struct ndn_component {
    uint32_t size;                                 /**< the actual size of the component buffer */
 } ndn_component_t;
 
-static size_t get_component_block_size(ndn_component_t *component)
+static size_t get_component_block_size(const ndn_component_t *component)
 {
-    size_t result = 0;
-    // FIXME
-    return result;
+    return get_block_size(component->type, component->size);
 };
 
 #ifdef __cplusplus

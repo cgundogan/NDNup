@@ -11,8 +11,7 @@ int8_t interest_encode(ndnup_buffer_write_t *out, ndn_interest_t *interest)
         result = -2; 
 
         if (interest) {
-            /* FIXME */
-            int size = 1;
+            int size = get_interest_size(interest);
 
             /* write outer TLV */
             ndnup_tlfield_encode(out, tlv_interest);
@@ -38,8 +37,11 @@ int8_t interest_encode(ndnup_buffer_write_t *out, ndn_interest_t *interest)
 
 
             /** write interest lifetime */ 
-            ndnup_tlfield_encode(out, tlv_interest_lifetime);
-            ndnup_tlfield_encode(out, 2);
+            if (interest->lifetime_enabled) {
+                ndnup_tlfield_encode(out, tlv_interest_lifetime);
+                ndnup_tlfield_encode(out, 2);
+
+            }
 
 
             /** write hop limit */ 

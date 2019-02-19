@@ -21,7 +21,9 @@
 #include <stdint.h>
 #include <string.h>
 
+#include "tlv.h"
 #include "name.h"
+#include "helper.h"
 #include "constants.h"
 #include "ndnup_buffer.h"
 
@@ -41,9 +43,15 @@ typedef struct interest_params {
   uint32_t size;
 } interest_params_t;
 
+/**
+ * Representation of a Interest message
+ */
 typedef struct ndn_interest {
+  ndn_name_t name;               /**< name of the interest */
+
   uint32_t nonce;                /**< nonce of the interest */
   uint64_t lifetime;             /**< lifetime of the interest */
+  uint8_t lifetime_enabled;      /**< indicates if the lifetime field is set*/
 
   uint8_t can_be_prefix;         /**< if present, the name element in the interest is a prefix, exact, or full name of the requested data packet */
   uint8_t can_be_prefix_enabled; /**< indicates if \ref can_be_prefix field is set */
@@ -67,6 +75,37 @@ static inline void interest_create(ndn_interest_t *interest)
     interest->lifetime = INTEREST_DEFAULT_LIFETIME;
 };
 
+static size_t get_interest_size(const ndn_interest_t* interest)
+{
+    size_t size = get_name_block_size(&(interest->name));
+ 
+    if (interest->can_be_prefix_enabled) {
+        size += 2;
+    } 
+ 
+    if (interest->must_be_fresh_enabled){
+        size += 2;
+    }
+
+    if (interest->hop_limit_enabled) { 
+        size += 3;
+    } 
+
+    if (interest->parameters_enabled) {
+        size += get_block_size(tlv_parameters, interest->parameters.size);
+    } 
+
+    /** size of nonce */
+    size += 6;
+
+    if (interest->lifetime_enabled) {
+        /** size of lifetime */
+        size += 4;  
+    }
+
+    return size;
+};
+
 /**
  * @brief       Encodes an Interest message
  *
@@ -76,7 +115,7 @@ static inline void interest_create(ndn_interest_t *interest)
  * @retval      -1 output buffer @p out was NULL
  * @retval      -2 interest @p intmsg was NULL
  */
-int8_t interest_encode(ndnup_buffer_write_t *out, ndn_interest_t *intmsg);
+int8_t interest_encode(ndnup_buffer_write_t *out, ndn_interest_t *interest);
 
 #ifdef __cplusplus
 }

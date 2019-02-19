@@ -17,6 +17,7 @@
 
 #include <stdint.h>
 
+#include "helper.h"
 #include "constants.h"
 #include "component.h"
 
@@ -51,7 +52,7 @@ static size_t get_name_block_size(const ndn_name_t* name)
         result += get_component_block_size(&(name->components[i]));
     }
 
-    return result;
+    return get_block_size(tlv_name, result);
 };
 
 #ifdef __cplusplus
