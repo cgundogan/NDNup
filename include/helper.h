@@ -15,6 +15,9 @@
  * @{
  */
 
+#include <stdlib.h>
+#include <stdint.h>
+
 #ifndef HELPER_H
 #define HELPER_H
 

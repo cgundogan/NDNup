@@ -10,7 +10,17 @@
 static uint8_t buffer[128];
 
 static ndn_interest_t simple_interest = {
-    .nonce = 0xFF,
+    .name =
+        {
+            .components = {{.type = tlv_generic_name_component,
+                            .size = 3,
+                            .value = {'h', 'a', 'w'}},
+                           {.type = tlv_generic_name_component,
+                            .size = 3,
+                            .value = {'m', 's', 'a'}}},
+            .components_size = 2,
+        },
+    .nonce = 0x000000FF,
     .can_be_prefix_enabled = 0,
     .must_be_fresh_enabled = 0,
     .parameters_enabled = 0,
@@ -30,16 +40,26 @@ static uint8_t simple_interest_expected[] = {
 };
 
 static ndn_interest_t interest_cbp_mbf_hl = {
-    .nonce = 0xFF,
+    .name =
+        {
+            .components = {{.type = tlv_generic_name_component,
+                            .size = 3,
+                            .value = {'h', 'a', 'w'}},
+                           {.type = tlv_generic_name_component,
+                            .size = 3,
+                            .value = {'m', 's', 'a'}}},
+            .components_size = 2,
+        },
+    .nonce = 0x000000FF,
     .can_be_prefix_enabled = 1,
     .must_be_fresh_enabled = 1,
     .parameters_enabled = 0,
     .hop_limit_enabled = 1,
-    .hop_limit = 63,
+    .hop_limit = 64,
 };
 static uint8_t interest_cbp_mbf_hl_expected[] = {
     /* Outermost TLV with length 18 */
-    0x05, 0x12,
+    0x05, 0x19,
     /* Name */
     0x07, 0x0A,
     /* GenericNameComponent "haw" */
