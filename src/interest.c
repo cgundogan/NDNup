@@ -3,6 +3,21 @@
 #include "interest.h"
 #include "name.h"
 
+int8_t nonce_encode(ndnup_buffer_write_t *out, uint32_t nonce)
+{
+    /* TODO add error checking */
+    int8_t result = 0;
+
+    ndnup_tlfield_encode(out, tlv_nonce);
+    ndnup_tlfield_encode(out, 4);
+    ndnup_buffer_write(out, (nonce & 0xFF000000) >> 24);
+    ndnup_buffer_write(out, (nonce & 0x00FF0000) >> 16);
+    ndnup_buffer_write(out, (nonce & 0x0000FF00) >> 8);
+    ndnup_buffer_write(out, (nonce & 0x000000FF) >> 0);
+
+    return result;
+}
+
 
 int8_t interest_encode(ndnup_buffer_write_t *out, ndn_interest_t *interest)
 {
@@ -36,12 +51,7 @@ int8_t interest_encode(ndnup_buffer_write_t *out, ndn_interest_t *interest)
             }
 
             /** write nonce */
-            ndnup_tlfield_encode(out, tlv_nonce);
-            ndnup_tlfield_encode(out, 4);
-            ndnup_buffer_write(out, (interest->nonce & 0xFF000000) >> 24);
-            ndnup_buffer_write(out, (interest->nonce & 0x00FF0000) >> 16);
-            ndnup_buffer_write(out, (interest->nonce & 0x0000FF00) >> 8);
-            ndnup_buffer_write(out, (interest->nonce & 0x000000FF) >> 0);
+            nonce_encode(out, interest->nonce);
 
             /** write interest lifetime */
             if (interest->lifetime_enabled) {
