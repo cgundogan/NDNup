@@ -4,30 +4,39 @@
 
 int8_t nonce_encode(buffer_write_t *out, uint32_t nonce)
 {
-    /* TODO add error checking */
-    int8_t result = 0;
+    int8_t result = -1;
 
-    tlfield_encode(out, tlv_nonce);
-    tlfield_encode(out, 4);
-    buffer_write(out, (nonce & 0xFF000000) >> 24);
-    buffer_write(out, (nonce & 0x00FF0000) >> 16);
-    buffer_write(out, (nonce & 0x0000FF00) >> 8);
-    buffer_write(out, (nonce & 0x000000FF) >> 0);
+    if (out) {
+        /* TODO add error checking */
+        ndnup_tlfield_encode(out, tlv_nonce);
+        ndnup_tlfield_encode(out, 4);
+        ndnup_buffer_write(out, (nonce & 0xFF000000) >> 24);
+        ndnup_buffer_write(out, (nonce & 0x00FF0000) >> 16);
+        ndnup_buffer_write(out, (nonce & 0x0000FF00) >> 8);
+        ndnup_buffer_write(out, (nonce & 0x000000FF) >> 0);
+
+        result = 0;
+    }
 
     return result;
 }
 
 int8_t interest_lifetime_encode(buffer_write_t *out, uint32_t interest_lifetime)
 {
-    /* TODO add error checking */
-    int8_t result = 0;
-    uint8_t lifetime_len = get_nonnegative_int_size(interest_lifetime);
+    int8_t result = -1;
 
-    tlfield_encode(out, tlv_interest_lifetime);
-    tlfield_encode(out, lifetime_len);
-    nonnegative_int_encode(out, interest_lifetime);
+    if (out) {
+        /* TODO add error checking */
+        uint8_t lifetime_len = get_nonnegative_int_size(interest_lifetime);
+        
+        ndnup_tlfield_encode(out, tlv_interest_lifetime);
+        ndnup_tlfield_encode(out, lifetime_len);
+        nonnegative_int_encode(out, interest_lifetime);
 
-    return 0;
+        result = 0;
+    }
+
+    return result;
 }
 
 int8_t interest_encode(buffer_write_t *out, ndn_interest_t *interest)
@@ -45,6 +54,7 @@ int8_t interest_encode(buffer_write_t *out, ndn_interest_t *interest)
             /* write length */
             tlfield_encode(out, size);
             /* write value */
+            
 
             /* write name */
             name_encode(out, (const ndn_name_t *)&interest->name);
