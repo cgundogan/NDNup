@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "ndnup_buffer.h"
+#include "buffer.h"
 
-int8_t ndnup_buffer_read(ndnup_buffer_read_t *nbuf, uint8_t *out)
+int8_t buffer_read(buffer_read_t *nbuf, uint8_t *out)
 {
     uint8_t result;
 
@@ -18,7 +18,7 @@ int8_t ndnup_buffer_read(ndnup_buffer_read_t *nbuf, uint8_t *out)
     return 0;
 }
 
-int8_t ndnup_buffer_write(ndnup_buffer_write_t *nbuf, uint8_t in)
+int8_t buffer_write(buffer_write_t *nbuf, uint8_t in)
 {
     if (nbuf->offset >= nbuf->length) {
         return -1;
@@ -29,7 +29,7 @@ int8_t ndnup_buffer_write(ndnup_buffer_write_t *nbuf, uint8_t in)
     return 0;
 }
 
-int8_t ndnup_buffer_read_block(ndnup_buffer_read_t *nbuf, uint8_t *block, size_t block_len)
+int8_t buffer_read_block(buffer_read_t *nbuf, uint8_t *block, size_t block_len)
 {
     if ((nbuf->offset + block_len) >= nbuf->length) {
         return -1;
@@ -41,7 +41,7 @@ int8_t ndnup_buffer_read_block(ndnup_buffer_read_t *nbuf, uint8_t *block, size_t
     return 0;
 }
 
-int8_t ndnup_buffer_write_block(ndnup_buffer_write_t *nbuf, uint8_t *block, size_t block_len)
+int8_t buffer_write_block(buffer_write_t *nbuf, uint8_t *block, size_t block_len)
 {
     if ((nbuf->offset + block_len) >= nbuf->length) {
         return -1;

@@ -33,7 +33,7 @@ endif (BUILD_DOC)
 add_library(NDNup STATIC
     src/tlv_encode.c
     src/tlv_decode.c
-    src/ndnup_buffer.c
+    src/buffer.c
     src/interest.c
 )
 

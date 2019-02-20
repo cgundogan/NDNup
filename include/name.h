@@ -21,11 +21,12 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-#include "ndnup_tlfield.h"
+#include "tlv.h"
 #include "helper.h"
 #include "constants.h"
 #include "component.h"
-#include "tlv.h"
+#include "name.h"
+#include "buffer.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -57,7 +58,7 @@ static size_t get_name_block_size(const ndn_name_t* name)
     return get_block_size(tlv_name, result);
 };
 
-static void name_encode(ndnup_buffer_write_t *out, const ndn_name_t *name)
+static void name_encode(buffer_write_t *out, const ndn_name_t *name)
 {
     tlfield_encode(out, tlv_name);
     tlfield_encode(out, get_name_block_size(name) - 2);
@@ -66,7 +67,7 @@ static void name_encode(ndnup_buffer_write_t *out, const ndn_name_t *name)
         ndn_component_t *comp = (ndn_component_t *) &(name->components[i]);
         tlfield_encode(out, comp->type);
         tlfield_encode(out, comp->size);
-        ndnup_buffer_write_block(out, comp->value, comp->size);
+        buffer_write_block(out, comp->value, comp->size);
     }
 }
 

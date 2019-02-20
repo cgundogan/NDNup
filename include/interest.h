@@ -25,7 +25,7 @@
 #include "name.h"
 #include "helper.h"
 #include "constants.h"
-#include "ndnup_buffer.h"
+#include "buffer.h"
 
 #ifndef INTEREST_DEFAULT_LIFETIME
 #define INTEREST_DEFAULT_LIFETIME (4000u)
@@ -115,7 +115,7 @@ static size_t get_interest_size(const ndn_interest_t* interest)
  * @retval      -1 output buffer @p out was NULL
  * @retval      -2 interest @p intmsg was NULL
  */
-int8_t interest_encode(ndnup_buffer_write_t *out, ndn_interest_t *interest);
+int8_t interest_encode(buffer_write_t *out, ndn_interest_t *interest);
 
 #ifdef __cplusplus
 }

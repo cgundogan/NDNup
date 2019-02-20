@@ -23,6 +23,7 @@
 
 #include "helper.h"
 #include "constants.h"
+#include "tlv.h"
 
 #ifdef __cplusplus
 extern "C" {

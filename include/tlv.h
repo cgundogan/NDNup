@@ -23,7 +23,7 @@
 #include <stdio.h>
 #include <stdint.h>
 
-#include "ndnup_buffer.h"
+#include "buffer.h"
 
 #ifndef TLV_MAJOR_VERSION
 #define TLV_MAJOR_VERSION 0
@@ -82,7 +82,7 @@ typedef uint32_t tlfield_t;
  * @return      Number of bytes written to @p out
  * @retval      0 on succes
  */
-int8_t tlfield_encode(ndnup_buffer_write_t *out, tlfield_t field);
+int8_t tlfield_encode(buffer_write_t *out, tlfield_t field);
 
 /**
  * @brief       Decodes a TLV field
@@ -91,7 +91,7 @@ int8_t tlfield_encode(ndnup_buffer_write_t *out, tlfield_t field);
  * @param[out]  field  decoded TLV field
  * @retval      0 on success
  */
-int8_t tlfield_decode(ndnup_buffer_read_t *in, tlfield_t *field);
+int8_t tlfield_decode(buffer_read_t *in, tlfield_t *field);
 
 
 #ifdef __cplusplus

@@ -7,7 +7,7 @@
  */
 
 /**
- * @file        component.h
+ * @file        constants.h
  * @brief       Constants for NDNup 
  * @author      Michael Frey <michael.frey@safetyio.com>
  * @copyright   MIT License

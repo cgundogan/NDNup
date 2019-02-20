@@ -1,24 +1,23 @@
 #include "tlv.h"
-#include "ndnup_tlfield.h"
 #include "interest.h"
 #include "name.h"
 
-int8_t nonce_encode(ndnup_buffer_write_t *out, uint32_t nonce)
+int8_t nonce_encode(buffer_write_t *out, uint32_t nonce)
 {
     /* TODO add error checking */
     int8_t result = 0;
 
     tlfield_encode(out, tlv_nonce);
     tlfield_encode(out, 4);
-    ndnup_buffer_write(out, (nonce & 0xFF000000) >> 24);
-    ndnup_buffer_write(out, (nonce & 0x00FF0000) >> 16);
-    ndnup_buffer_write(out, (nonce & 0x0000FF00) >> 8);
-    ndnup_buffer_write(out, (nonce & 0x000000FF) >> 0);
+    buffer_write(out, (nonce & 0xFF000000) >> 24);
+    buffer_write(out, (nonce & 0x00FF0000) >> 16);
+    buffer_write(out, (nonce & 0x0000FF00) >> 8);
+    buffer_write(out, (nonce & 0x000000FF) >> 0);
 
     return result;
 }
 
-int8_t interest_lifetime_encode(ndnup_buffer_write_t *out, uint32_t interest_lifetime)
+int8_t interest_lifetime_encode(buffer_write_t *out, uint32_t interest_lifetime)
 {
     /* TODO add error checking */
     int8_t result = 0;
@@ -31,7 +30,7 @@ int8_t interest_lifetime_encode(ndnup_buffer_write_t *out, uint32_t interest_lif
     return 0;
 }
 
-int8_t interest_encode(ndnup_buffer_write_t *out, ndn_interest_t *interest)
+int8_t interest_encode(buffer_write_t *out, ndn_interest_t *interest)
 {
     int8_t result = -1;
 
@@ -74,7 +73,7 @@ int8_t interest_encode(ndnup_buffer_write_t *out, ndn_interest_t *interest)
             if (interest->hop_limit_enabled) {
                 tlfield_encode(out, tlv_hop_limit);
                 tlfield_encode(out, 1);
-                ndnup_buffer_write(out, interest->hop_limit);
+                buffer_write(out, interest->hop_limit);
             }
 
             /* write parameters */

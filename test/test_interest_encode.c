@@ -82,9 +82,9 @@ static uint8_t interest_cbp_mbf_il_hl_expected[] = {
 
 void test_interest_encode_simple(void) {
   int8_t error = 0;
-  ndnup_buffer_write_t buf;
+  buffer_write_t buf;
 
-  ndnup_buffer_init(&buf, buffer, sizeof(buffer) / sizeof(buffer[0]));
+  buffer_init(&buf, buffer, sizeof(buffer) / sizeof(buffer[0]));
 
   error = interest_encode(&buf, &simple_interest);
 
@@ -98,9 +98,9 @@ void test_interest_encode_simple(void) {
 
 void test_interest_encode_cbp_mbf_il_hl(void) {
   int8_t error = 0;
-  ndnup_buffer_write_t buf;
+  buffer_write_t buf;
 
-  ndnup_buffer_init(&buf, buffer, sizeof(buffer) / sizeof(buffer[0]));
+  buffer_init(&buf, buffer, sizeof(buffer) / sizeof(buffer[0]));
 
   error = interest_encode(&buf, &interest_cbp_mbf_il_hl);
 

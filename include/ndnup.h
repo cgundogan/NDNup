@@ -22,8 +22,8 @@
 #include <stdint.h>
 
 #include "tlv.h"
-#include "ndnup_buffer.h"
-#include "ndnup_interest.h"
+#include "buffer.h"
+#include "interest.h"
 
 #endif /* NDNUP_H */
 
