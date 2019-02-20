@@ -45,20 +45,6 @@ static inline size_t get_block_size(uint32_t type, uint32_t payload_size)
     return payload_size + get_var_size(type) + get_var_size(payload_size);
 }
 
-static inline size_t get_nonnegative_int_size(uint32_t value)
-{
-    if (value <= 0x000000FF) {
-        return 1;
-    }
-    else if (value <= 0x0000FFFF) {
-        return 2;
-    }
-    else if (value <= 0xFFFFFFFF) {
-        return 4;
-    }
-    return 8;
-}
-
 #ifdef __cplusplus
 }
 #endif

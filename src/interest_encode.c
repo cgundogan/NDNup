@@ -27,7 +27,7 @@ int8_t interest_lifetime_encode(buffer_write_t *out, uint32_t interest_lifetime)
 
     if (out) {
         /* TODO add error checking */
-        uint8_t lifetime_len = get_nonnegative_int_size(interest_lifetime);
+        uint8_t lifetime_len = nonnegative_int_length(interest_lifetime);
         
         ndnup_tlfield_encode(out, tlv_interest_lifetime);
         ndnup_tlfield_encode(out, lifetime_len);
