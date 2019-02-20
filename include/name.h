@@ -36,7 +36,7 @@ extern "C" {
  * The structure to represent the Name.
  * This structure is memory expensive so please be careful when using it.
  */
-typedef struct ndn_name {
+typedef struct {
   /**
    * The array of name components contained in this name (not including T and L)
    */

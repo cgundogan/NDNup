@@ -39,16 +39,34 @@ extern "C" {
 #endif
 
 /**
+ * Representation of the MetaInfo TLV
+ */
+typedef struct {
+    tlfield_t contenttype;              /**< content type */
+    tlfield_t freshnessperiod;          /**< period the data is marked as fresh */
+    ndn_component_t finalblockid;       /**< indicating the final name component */
+} ndn_data_metainfo_t;
+
+/**
+ * Representation of the Content TLV
+ */
+typedef struct {
+    uint8_t value[DATA_CONTENT_LENGTH];  /**< actual content */
+    size_t length;                       /**< length of the content */
+} ndn_data_content_t;
+
+/**
  * Representation of a Data message
  */
 typedef struct {
-    ndn_name_t name;                       /**< name of the interest */
-    uint8_t content[DATA_CONTENT_LENGTH];  /**< actual content */
-    uint8_t metainfo_enabled :1;           /**< indicates if MetaInfo TLV is included */
-    uint8_t contenttype_enabled :1;        /**< indicates if \ref contenttype is set */
-    uint8_t freshnessperiod_enabled :1;    /**< indicates if \ref freshnessperiod is set */
-    uint8_t finalblockid_enabled :1;       /**< indicates if \ref finalblockid is set */
-    uint8_t content_enabled :1;            /**< indicates if \ref content is set */
+    ndn_name_t name;                       /**< name of the data */
+    ndn_data_metainfo_t metainfo;          /**< MetaInfo TLV */
+    ndn_data_content_t content;            /**< Content TLV */
+    uint8_t metainfo_enabled :1;           /**< indicates if @ref metainfo is included */
+    uint8_t contenttype_enabled :1;        /**< indicates if @ref metainfo::contenttype is set */
+    uint8_t freshnessperiod_enabled :1;    /**< indicates if @ref metainfo::freshnessperiod is set */
+    uint8_t finalblockid_enabled :1;       /**< indicates if @ref metainfo::finalblockid is set */
+    uint8_t content_enabled :1;            /**< indicates if @ref content is set */
 } ndn_data_t;
 
 static inline void data_create(ndn_data_t *data)
