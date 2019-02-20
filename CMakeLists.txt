@@ -34,7 +34,7 @@ add_library(NDNup STATIC
     src/tlv_encode.c
     src/tlv_decode.c
     src/buffer.c
-    src/interest.c
+    src/interest_encode.c
 )
 
 target_include_directories(NDNup PUBLIC
