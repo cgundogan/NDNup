@@ -79,7 +79,6 @@ typedef uint32_t tlfield_t;
  *
  * @param[out]  out     output buffer
  * @param[in]   field   number to encode
- * @return      Number of bytes written to @p out
  * @retval      0 on succes
  */
 int8_t tlfield_encode(buffer_write_t *out, tlfield_t field);
@@ -93,6 +92,14 @@ int8_t tlfield_encode(buffer_write_t *out, tlfield_t field);
  */
 int8_t tlfield_decode(buffer_read_t *in, tlfield_t *field);
 
+/**
+ * @brief       Encodes a Non Negative Integer
+ *
+ * @param[out]  out     output buffer
+ * @param[in]   value   number to encode
+ * @retval      0 on succes
+ */
+int8_t nonnegative_int_encode(buffer_write_t *out, uint32_t value);
 
 #ifdef __cplusplus
 }

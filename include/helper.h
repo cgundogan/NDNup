@@ -59,19 +59,6 @@ static inline size_t get_nonnegative_int_size(uint32_t value)
     return 8;
 }
 
-static inline int8_t nonnegative_int_encode(buffer_write_t *out, uint32_t value)
-{
-    if (value > 0x0000FFFF) {
-        buffer_write(out, (value & 0xFF000000) >> 24);
-        buffer_write(out, (value & 0x00FF0000) >> 16);
-    }
-    if (value > 0x000000FF) {
-        buffer_write(out, (value & 0x0000FF00) >> 8);
-    }
-    buffer_write(out, (value & 0x000000FF) >> 0);
-    return 0;
-}
-
 #ifdef __cplusplus
 }
 #endif

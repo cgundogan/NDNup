@@ -48,3 +48,19 @@ int8_t tlfield_encode(buffer_write_t *out, tlfield_t field)
 
     return result;
 }
+
+int8_t nonnegative_int_encode(buffer_write_t *out, uint32_t value)
+{
+    int8_t result = 0;
+
+    if (value > 0x0000FFFF) {
+        buffer_write(out, (value & 0xFF000000) >> 24);
+        buffer_write(out, (value & 0x00FF0000) >> 16);
+    }
+    if (value > 0x000000FF) {
+        buffer_write(out, (value & 0x0000FF00) >> 8);
+    }
+    buffer_write(out, (value & 0x000000FF) >> 0);
+
+    return result;
+}
