@@ -119,10 +119,10 @@ int8_t interest_encode(buffer_write_t *out, ndn_interest_t *interest);
 
 
 /**
- * @brief       Encodes an Interest message
+ * @brief       Decodes an Interest message
  *
- * @param[in]   in       input buffer
  * @param[out]  interest Interest to decode from @p in 
+ * @param[in]   in       input buffer
  * @retval      0 on succes
  * @retval      -1 interest @p interest  was NULL
  * @retval      -2 input buffer @p in was NULL
