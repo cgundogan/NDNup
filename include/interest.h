@@ -110,12 +110,25 @@ static size_t get_interest_size(const ndn_interest_t* interest)
  * @brief       Encodes an Interest message
  *
  * @param[out]  out      output buffer
- * @param[in]   intmsg   Interset to encode into @p out
+ * @param[in]   interest   Interset to encode into @p out
  * @retval      0 on succes
  * @retval      -1 output buffer @p out was NULL
  * @retval      -2 interest @p intmsg was NULL
  */
 int8_t interest_encode(buffer_write_t *out, ndn_interest_t *interest);
+
+
+/**
+ * @brief       Encodes an Interest message
+ *
+ * @param[in]   in       input buffer
+ * @param[out]  interest Interest to decode from @p in 
+ * @retval      0 on succes
+ * @retval      -1 interest @p interest  was NULL
+ * @retval      -2 input buffer @p in was NULL
+ * @retval      -3 data in @p in to decode was not an Interest packet 
+ */
+int8_t interest_decode(ndn_interest_t *interest, buffer_read_t *in);
 
 #ifdef __cplusplus
 }
