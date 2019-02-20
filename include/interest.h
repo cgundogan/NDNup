@@ -113,7 +113,7 @@ static size_t get_interest_size(const ndn_interest_t* interest)
  * @param[in]   interest   Interset to encode into @p out
  * @retval      0 on succes
  * @retval      -1 output buffer @p out was NULL
- * @retval      -2 interest @p intmsg was NULL
+ * @retval      -2 @p interest was NULL
  */
 int8_t interest_encode(buffer_write_t *out, ndn_interest_t *interest);
 
