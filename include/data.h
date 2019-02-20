@@ -32,26 +32,43 @@ extern "C" {
 #endif
 
 /**
+ * @brief Maximal length of content in Data messages
+ */
+#ifndef DATA_CONTENT_LENGTH
+#define DATA_CONTENT_LENGTH (16)
+#endif
+
+/**
  * Representation of a Data message
  */
 typedef struct {
-  ndn_name_t name;               /**< name of the interest */
-
+    ndn_name_t name;                       /**< name of the interest */
+    uint8_t content[DATA_CONTENT_LENGTH];  /**< actual content */
+    uint8_t metainfo_enabled :1;           /**< indicates if MetaInfo TLV is included */
+    uint8_t contenttype_enabled :1;        /**< indicates if \ref contenttype is set */
+    uint8_t freshnessperiod_enabled :1;    /**< indicates if \ref freshnessperiod is set */
+    uint8_t finalblockid_enabled :1;       /**< indicates if \ref finalblockid is set */
+    uint8_t content_enabled :1;            /**< indicates if \ref content is set */
 } ndn_data_t;
-
 
 static inline void data_create(ndn_data_t *data)
 {
     /** initialize all fields of the data with '0' */
     memset(data, 0, sizeof(ndn_data_t));
-};
+}
 
-static size_t get_interest_size(const ndn_data_t* data)
+/**
+ * @brief       Returns the actual encoded size of the @p data message
+ *
+ * @param[in]   data Data message
+ * @return      actual encoded size in bytes of @p data
+ */
+static size_t get_data_size(const ndn_data_t* data)
 {
     size_t size = get_name_block_size(&(data->name));
 
     return size;
-};
+}
 
 /**
  * @brief       Encodes an Data message

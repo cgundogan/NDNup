@@ -19,6 +19,8 @@ extern void test_interest_encode_complex(void);
 
 extern void test_interest_decode_simple(void);
 
+extern void test_data_encode_simple(void);
+
 int main(void)
 {
     UNITY_BEGIN();
@@ -35,6 +37,8 @@ int main(void)
     RUN_TEST(test_interest_encode_complex);
 
     RUN_TEST(test_interest_decode_simple);
+
+    RUN_TEST(test_data_encode_simple);
 
     return UNITY_END();
 }

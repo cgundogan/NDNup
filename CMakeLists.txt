@@ -36,6 +36,7 @@ add_library(NDNup STATIC
     src/buffer.c
     src/interest_encode.c
     src/interest_decode.c
+    src/data_encode.c
 )
 
 target_include_directories(NDNup PUBLIC
@@ -52,6 +53,7 @@ if (BUILD_TESTING)
         "${CMAKE_CURRENT_SOURCE_DIR}/test/test_tlv_encode.c"
         "${CMAKE_CURRENT_SOURCE_DIR}/test/test_tlv_decode.c"
         "${CMAKE_CURRENT_SOURCE_DIR}/test/test_interest.c"
+        "${CMAKE_CURRENT_SOURCE_DIR}/test/test_data.c"
         )
     target_link_libraries(unittest-ndnup unity NDNup)
     add_test(ndnup-tests unittest-ndnup)
