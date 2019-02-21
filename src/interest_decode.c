@@ -36,6 +36,8 @@ int8_t interest_decode(ndn_interest_t *interest, buffer_read_t *in)
                             return result;
                         }
 
+                        // TODO: add error handling
+
                         if (field == tlv_nonce) {
                             /** read length */
                             tlfield_decode(in, &field);
@@ -59,6 +61,7 @@ int8_t interest_decode(ndn_interest_t *interest, buffer_read_t *in)
                             /** read length */
                             tlfield_decode(in, &field);
                             interest->hop_limit_enabled = 1;
+                            uint8_decode(in, &(interest->hop_limit));
                         }
 
                         if (field == tlv_interest_lifetime) {
