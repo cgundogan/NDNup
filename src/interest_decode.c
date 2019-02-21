@@ -24,9 +24,52 @@ int8_t interest_decode(ndn_interest_t *interest, buffer_read_t *in)
                     uint32_t length = tlfield_decode(in, &field);
 
                     /** read the name of the interest */
-                //    tlfield_decode(in, &field);
-                    
-                
+                    if ((result = tlfield_decode_name(in, &(interest->name))) == -1) {
+                        return result;
+                    }
+
+                    /** read the remaining fields */
+                    while (in->offset < in->length) {
+                        /** read type */
+                        if((result = tlfield_decode(in, &field)) != 0) {
+                            /** todo */
+                            return result;
+                        }
+
+                        if (field == tlv_nonce) {
+                            /** read length */
+                            tlfield_decode(in, &field);
+                            /** read actual nonce value */
+                            //tlfield_decode(in, &field);
+
+                        }
+
+                        if (field == tlv_must_be_fresh) {
+                            /** read length */
+                            tlfield_decode(in, &field);
+                            interest->must_be_fresh_enabled = 1;
+                        }
+
+                        if (field == tlv_can_be_prefix) {
+                            /** read length */
+                            tlfield_decode(in, &field);
+                            interest->can_be_prefix_enabled = 1;
+                        }
+
+                        if (field == tlv_hop_limit) {
+                            /** read length */
+                            tlfield_decode(in, &field);
+                            interest->hop_limit_enabled = 1;
+                        }
+
+                        if (field == tlv_interest_lifetime) {
+                            /** read length */
+                            tlfield_decode(in, &field);
+                            interest->lifetime_enabled = 1;
+
+                        }
+
+                    }
                 }
             }
 
