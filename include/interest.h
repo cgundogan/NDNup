@@ -130,6 +130,7 @@ int8_t interest_encode(buffer_write_t *out, ndn_interest_t *interest);
  */
 int8_t interest_decode(ndn_interest_t *interest, buffer_read_t *in);
 
+
 #ifdef __cplusplus
 }
 #endif

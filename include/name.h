@@ -25,7 +25,6 @@
 #include "helper.h"
 #include "constants.h"
 #include "component.h"
-#include "name.h"
 #include "buffer.h"
 
 #ifdef __cplusplus
@@ -70,6 +69,8 @@ static void name_encode(buffer_write_t *out, const ndn_name_t *name)
         buffer_write_block(out, comp->value, comp->size);
     }
 }
+
+int8_t tlfield_decode_name(buffer_read_t *in, ndn_name_t *name);
 
 #ifdef __cplusplus
 }

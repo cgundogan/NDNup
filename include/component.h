@@ -21,9 +21,9 @@
 #include <limits.h>
 #include <stdint.h>
 
+#include "tlv.h"
 #include "helper.h"
 #include "constants.h"
-#include "tlv.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -82,6 +82,8 @@ static size_t get_component_block_size(const ndn_component_t *component)
 {
     return get_block_size(component->type, component->size);
 };
+
+int8_t tlfield_decode_name_component(buffer_read_t *in, ndn_component_t *component);
 
 #ifdef __cplusplus
 }

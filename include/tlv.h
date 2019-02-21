@@ -128,6 +128,7 @@ size_t nonnegative_int_length(uint32_t value);
  */
 int8_t tlv_boolean_encode(buffer_write_t *out, tlfield_t type);
 
+
 #ifdef __cplusplus
 }
 #endif
