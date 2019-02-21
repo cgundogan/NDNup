@@ -120,3 +120,28 @@ int8_t uint16_decode(buffer_read_t *in, uint16_t *value)
     return result;
 }
 
+int8_t uint32_decode(buffer_read_t *in, uint32_t *value)
+{
+    int8_t result = -1;
+
+    if (in) {
+        result = -2;
+
+        if (value) {
+            result = -3;
+
+            if ((in->offset + 4) <= in->length) {
+                result = 0;
+                *value = 0;
+
+                for (uint8_t i = 0; i < 4; i++) {    
+                    *value += (uint32_t)in->buffer[in->offset + i] << (8 * (3 - i));
+                }
+
+                in->offset += 4;
+            }
+        }
+    }
+
+    return result;
+}

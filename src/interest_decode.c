@@ -40,8 +40,7 @@ int8_t interest_decode(ndn_interest_t *interest, buffer_read_t *in)
                             /** read length */
                             tlfield_decode(in, &field);
                             /** read actual nonce value */
-                            //tlfield_decode(in, &field);
-
+                            uint32_decode(in, &(interest->nonce));
                         }
 
                         if (field == tlv_must_be_fresh) {
@@ -79,7 +78,3 @@ int8_t interest_decode(ndn_interest_t *interest, buffer_read_t *in)
 
     return result;
 }
-
-
-
-
