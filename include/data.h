@@ -86,6 +86,18 @@ static inline void data_create(ndn_data_t *data)
  */
 int8_t data_encode(buffer_write_t *out, ndn_data_t *data);
 
+/**
+ * @brief       Decodes a Data message
+ *
+ * @param[out]  data     Data to decode from @p in
+ * @param[in]   in       input buffer
+ * @retval      0 on succes
+ * @retval      -1 data @p data  was NULL
+ * @retval      -2 input buffer @p in was NULL
+ * @retval      -3 data in @p in to decode was not a Data packet
+ */
+int8_t data_decode(ndn_data_t *data, buffer_read_t *in);
+
 #ifdef __cplusplus
 }
 #endif

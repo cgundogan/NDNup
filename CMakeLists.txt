@@ -39,6 +39,7 @@ add_library(NDNup STATIC
     src/interest_encode.c
     src/interest_decode.c
     src/data_encode.c
+    src/data_decode.c
 )
 
 target_include_directories(NDNup PUBLIC

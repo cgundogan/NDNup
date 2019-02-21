@@ -106,3 +106,18 @@ void test_data_encode_complex(void) {
     TEST_ASSERT_EQUAL_UINT(sizeof(complex_data_buffer)/sizeof(complex_data_buffer[0]), buf.offset);
     TEST_ASSERT_EQUAL_UINT8_ARRAY(complex_data_buffer,buf.buffer, buf.offset);
 }
+
+void test_data_decode_simple(void) {
+    int8_t error = 0;
+    buffer_read_t buf;
+    ndn_data_t data;
+
+    buffer_init(&buf, simple_data_buffer, sizeof(simple_data_buffer) / sizeof(simple_data_buffer[0]));
+
+    error = data_decode(&data, &buf);
+
+    TEST_ASSERT_EQUAL_INT8(0, error);
+    TEST_ASSERT_EQUAL_UINT(sizeof(simple_data_buffer)/sizeof(simple_data_buffer[0]), buf.offset);
+    TEST_ASSERT_EQUAL_UINT8_ARRAY(simple_data_buffer,buf.buffer, buf.offset);
+    TEST_ASSERT_EQUAL_MEMORY(&simple_data, &data, sizeof(data));
+}
