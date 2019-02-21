@@ -25,6 +25,7 @@ static ndn_interest_t simple_interest = {
     .must_be_fresh_enabled = 0,
     .parameters_enabled = 0,
     .hop_limit_enabled = 0,
+    .lifetime_enabled = 0,
 };
 static uint8_t simple_interest_buffer[] = {
     /* Outermost TLV with length 18 */

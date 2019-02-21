@@ -72,8 +72,6 @@ static inline void interest_create(ndn_interest_t *interest)
 {
     /** initialize all fields of the interest with '0' */
     memset(interest, 0, sizeof(ndn_interest_t));
-    /** set default network lifetime */
-    interest->lifetime = INTEREST_DEFAULT_LIFETIME;
 };
 
 static size_t get_interest_size(const ndn_interest_t* interest)

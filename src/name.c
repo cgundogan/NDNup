@@ -32,7 +32,7 @@ int8_t tlfield_decode_name(buffer_read_t *in, ndn_name_t *name)
     int8_t result = -1;
 
     if (in) {
-        tlfield_t field;
+        tlfield_t field = 0;
 
         result = -2;
         /** read type field */
@@ -71,6 +71,7 @@ int8_t tlfield_decode_name(buffer_read_t *in, ndn_name_t *name)
             if ((result = tlfield_decode_name_component(in, &(name->components[i]))) != 0) {
                 return result;
             }
+            i++;
         }
 
         result = 0;

@@ -39,10 +39,7 @@ int8_t interest_decode(ndn_interest_t *interest, buffer_read_t *in)
                         // TODO: add error handling
 
                         if (field == tlv_nonce) {
-                            /** read length */
-                            tlfield_decode(in, &field);
-                            /** read actual nonce value */
-                            uint32_decode(in, &(interest->nonce));
+                            tlv_nonnegative_int_decode(in, &(interest->nonce));
                         }
 
                         if (field == tlv_must_be_fresh) {
@@ -58,17 +55,13 @@ int8_t interest_decode(ndn_interest_t *interest, buffer_read_t *in)
                         }
 
                         if (field == tlv_hop_limit) {
-                            /** read length */
-                            tlfield_decode(in, &field);
+                            tlv_nonnegative_int_decode(in, &(interest->hop_limit));
                             interest->hop_limit_enabled = 1;
-                            uint8_decode(in, &(interest->hop_limit));
                         }
 
                         if (field == tlv_interest_lifetime) {
-                            /** read length */
-                            tlfield_decode(in, &field);
+                            tlv_nonnegative_int_decode(in, (uint64_t *)&(interest->nonce));
                             interest->lifetime_enabled = 1;
-
                         }
 
                     }
