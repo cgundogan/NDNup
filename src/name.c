@@ -1,6 +1,32 @@
 #include "tlv.h"
 #include "name.h"
 
+size_t get_name_block_size(const ndn_name_t* name)
+{
+    size_t result = 0;
+
+    for (uint32_t i = 0; i < name->components_size; i++) {
+        result += get_component_block_size(&(name->components[i]));
+    }
+
+    return get_block_size(tlv_name, result);
+}
+
+int8_t name_encode(buffer_write_t *out, const ndn_name_t *name)
+{
+    tlfield_encode(out, tlv_name);
+    tlfield_encode(out, get_name_block_size(name) - 2);
+
+    for (uint32_t i = 0; i < name->components_size; i++) {
+        ndn_component_t *comp = (ndn_component_t *) &(name->components[i]);
+        tlfield_encode(out, comp->type);
+        tlfield_encode(out, comp->size);
+        buffer_write_block(out, comp->value, comp->size);
+    }
+
+    return 0;
+}
+
 int8_t tlfield_decode_name(buffer_read_t *in, ndn_name_t *name)
 {
     int8_t result = -1;
