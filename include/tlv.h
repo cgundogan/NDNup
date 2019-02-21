@@ -128,6 +128,17 @@ size_t nonnegative_int_length(uint32_t value);
  */
 int8_t tlv_boolean_encode(buffer_write_t *out, tlfield_t type);
 
+/**
+ * @brief       Decodes a uint8_t value
+ *
+ * @param[in]   in    input buffer to read
+ * @param[out]  value value to write to 
+ * @retval      0 on succes
+ * @retval      -1 @p in was NULL 
+ * @retval      -2 @p value was NULL 
+ * @retval      -3 Can't decode uint16_t from buffer @p in
+ */
+int8_t uint8_decode(buffer_read_t *in, uint8_t *value);
 
 /**
  * @brief       Decodes a uint16_t value

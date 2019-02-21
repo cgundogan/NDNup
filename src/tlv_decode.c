@@ -96,6 +96,29 @@ int8_t tlfield_decode(buffer_read_t *in, tlfield_t *field)
     return result;
 }
 
+int8_t uint8_decode(buffer_read_t *in, uint8_t *value)
+{
+    int8_t result = -1;
+
+    if (in) {
+        result = -2;
+
+        if (value) {
+            result = -3;
+
+            if ((in->offset + 1) <= in->length) {
+                result = 0;
+
+                *value = in->buffer[in->offset]; 
+
+                in->offset += 1;
+            }
+        }
+    }
+
+    return result;
+}
+
 int8_t uint16_decode(buffer_read_t *in, uint16_t *value)
 {
     int8_t result = -1;
