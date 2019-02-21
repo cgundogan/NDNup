@@ -47,23 +47,24 @@ typedef struct interest_params {
  * Representation of a Interest message
  */
 typedef struct ndn_interest {
-  ndn_name_t name;               /**< name of the interest */
+    ndn_name_t name;               /**< name of the interest */
 
-  uint32_t nonce;                /**< nonce of the interest */
-  uint32_t lifetime;             /**< lifetime of the interest */
-  uint8_t lifetime_enabled;      /**< indicates if the lifetime field is set*/
+    uint32_t nonce;                /**< nonce of the interest */
+    uint32_t lifetime;             /**< lifetime of the interest */
 
-  uint8_t can_be_prefix;         /**< if present, the name element in the interest is a prefix, exact, or full name of the requested data packet */
-  uint8_t can_be_prefix_enabled; /**< indicates if \ref can_be_prefix field is set */
+    uint8_t can_be_prefix;         /**< if present, the name element in the interest is a prefix, exact, or full name of the requested data packet */
 
-  uint8_t must_be_fresh;         /**< indicates whether a content store may satisfy the interest with stale data */
-  uint8_t must_be_fresh_enabled; /**< indicates if \ref must_be_fresh field is set */
+    uint8_t must_be_fresh;         /**< indicates whether a content store may satisfy the interest with stale data */
 
-  interest_params_t parameters;  /**< parameters of the interest */
-  uint8_t parameters_enabled;    /**< indicates if parameters field is set */
+    interest_params_t parameters;  /**< parameters of the interest */
 
-  uint8_t hop_limit;             /**< hop limit */
-  uint8_t hop_limit_enabled;     /**< indicates if field \ref hop_limit is set */
+    uint8_t hop_limit;             /**< hop limit */
+
+    uint8_t lifetime_enabled :1;      /**< indicates if the lifetime field is set*/
+    uint8_t can_be_prefix_enabled :1; /**< indicates if @ref can_be_prefix field is set */
+    uint8_t must_be_fresh_enabled :1; /**< indicates if @ref must_be_fresh field is set */
+    uint8_t parameters_enabled :1;    /**< indicates if parameters field is set */
+    uint8_t hop_limit_enabled :1;     /**< indicates if field @ref hop_limit is set */
 } ndn_interest_t;
 
 
