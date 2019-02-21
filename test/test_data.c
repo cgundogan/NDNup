@@ -73,7 +73,7 @@ static uint8_t complex_data_buffer[] = {
     /* MetaInfo TLV */
     0x14, 0x07,
     /* Content Type */
-    0x18, 0x01, 0x01,
+    0x18, 0x01, 0x00,
     /* FeshnessPeriod */
     0x19, 0x02, 0xFF, 0xFF,
     /* Content TLV */

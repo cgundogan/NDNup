@@ -76,19 +76,6 @@ static inline void data_create(ndn_data_t *data)
 }
 
 /**
- * @brief       Returns the actual encoded size of the @p data message
- *
- * @param[in]   data Data message
- * @return      actual encoded size in bytes of @p data
- */
-static size_t get_data_size(const ndn_data_t* data)
-{
-    size_t size = get_name_block_size(&(data->name));
-
-    return size;
-}
-
-/**
  * @brief       Encodes an Data message
  *
  * @param[out]  out      output buffer
