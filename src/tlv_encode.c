@@ -64,3 +64,34 @@ int8_t nonnegative_int_encode(buffer_write_t *out, uint32_t value)
 
     return result;
 }
+
+int8_t tlv_nonnegative_int_encode(buffer_write_t *out, tlfield_t type, uint32_t value)
+{
+    tlfield_encode(out, type);
+    tlfield_encode(out, nonnegative_int_length(value));
+    nonnegative_int_encode(out, value);
+
+    return 0;
+}
+
+size_t nonnegative_int_length(uint32_t value)
+{
+    if (value <= 0x000000FF) {
+        return 1;
+    }
+    else if (value <= 0x0000FFFF) {
+        return 2;
+    }
+    else if (value <= 0xFFFFFFFF) {
+        return 4;
+    }
+    return 8;
+}
+
+int8_t tlv_boolean_encode(buffer_write_t *out, tlfield_t type)
+{
+    tlfield_encode(out, type);
+    tlfield_encode(out, 0);
+
+    return 0;
+}

@@ -102,24 +102,31 @@ int8_t tlfield_decode(buffer_read_t *in, tlfield_t *field);
 int8_t nonnegative_int_encode(buffer_write_t *out, uint32_t value);
 
 /**
+ * @brief       Encodes a Non Negative Integer
+ *
+ * @param[out]  out     output buffer
+ * @param[in]   type    type to encode
+ * @param[in]   value   number to encode
+ * @retval      0 on succes
+ */
+int8_t tlv_nonnegative_int_encode(buffer_write_t *out, tlfield_t type, uint32_t value);
+
+/**
  * @brief       Returns the length in bytes of an encoded non-negative interger @p value
  *
  * @param[in]   value   non-negative integer
  * @return      length in bytes of the encoded non-negative integer value
  */
-static inline size_t nonnegative_int_length(uint32_t value)
-{
-    if (value <= 0x000000FF) {
-        return 1;
-    }
-    else if (value <= 0x0000FFFF) {
-        return 2;
-    }
-    else if (value <= 0xFFFFFFFF) {
-        return 4;
-    }
-    return 8;
-}
+size_t nonnegative_int_length(uint32_t value);
+
+/**
+ * @brief       Encodes a boolean value
+ *
+ * @param[out]  out     output buffer
+ * @param[in]   type    type to encode
+ * @retval      0 on succes
+ */
+int8_t tlv_boolean_encode(buffer_write_t *out, tlfield_t type);
 
 #ifdef __cplusplus
 }

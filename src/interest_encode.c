@@ -27,11 +27,8 @@ int8_t interest_lifetime_encode(buffer_write_t *out, uint32_t interest_lifetime)
 
     if (out) {
         /* TODO add error checking */
-        uint8_t lifetime_len = nonnegative_int_length(interest_lifetime);
-        
-        tlfield_encode(out, tlv_interest_lifetime);
-        tlfield_encode(out, lifetime_len);
-        nonnegative_int_encode(out, interest_lifetime);
+
+        tlv_nonnegative_int_encode(out, tlv_interest_lifetime, interest_lifetime);
 
         result = 0;
     }
@@ -53,22 +50,18 @@ int8_t interest_encode(buffer_write_t *out, ndn_interest_t *interest)
             tlfield_encode(out, tlv_interest);
             /* write length */
             tlfield_encode(out, size);
-            /* write value */
-            
 
             /* write name */
             name_encode(out, (const ndn_name_t *)&interest->name);
 
             /* write 'can be prefix' */
             if (interest->can_be_prefix_enabled) {
-                tlfield_encode(out, tlv_can_be_prefix);
-                tlfield_encode(out, 0);
+                tlv_boolean_encode(out, tlv_can_be_prefix);
             }
 
             /* write 'must be fresh' */
             if (interest->must_be_fresh_enabled) {
-                tlfield_encode(out, tlv_must_be_fresh);
-                tlfield_encode(out, 0);
+                tlv_boolean_encode(out, tlv_must_be_fresh);
             }
 
             /* write nonce */
