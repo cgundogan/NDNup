@@ -13,14 +13,14 @@ int8_t interest_decode(ndn_interest_t *interest, buffer_read_t *in)
             /** initalize interest with default values */
             interest_create(interest);
 
-            tlfield_t field;
+            tlfield_t field = 0;
             /** if reading the type of the first type-length field was successful */
             if ((result = tlfield_decode(in, &field)) == 0) {
                 result = -3;
 
                 /** check if the buffer actually contains an interest */
                 if (field == tlv_interest) {
-                    /** read the length of the interest */ 
+                    /** read the length of the interest */
                     uint32_t length = tlfield_decode(in, &field);
 
                     /** read the name of the interest */
@@ -67,6 +67,8 @@ int8_t interest_decode(ndn_interest_t *interest, buffer_read_t *in)
                     }
                 }
             }
+
+            result = 0;
 
             return result;
         }
