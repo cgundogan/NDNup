@@ -26,9 +26,8 @@ int8_t tlfield_decode_name_component(buffer_read_t *in, ndn_component_t *compone
         }
 
         component->size = field;
-
-
-        result = 0;
+        /** FIXME: check */
+        result = buffer_read_block(in, component->value, component->size);
     }
 
     return result;
