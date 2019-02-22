@@ -189,7 +189,7 @@ int8_t tlv_nonnegative_int_decode(buffer_read_t *in, uint64_t *value)
                     uint64_t tmp = 0;
                     buffer_read(in, (uint8_t *)&tmp);
                     *value += tmp << ((length - 1) * 8);
-                } while (length--);
+                } while (--length);
             }
         }
     }
