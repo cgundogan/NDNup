@@ -69,4 +69,8 @@ int8_t tlfield_decode_name(buffer_read_t *in, ndn_name_t *name);
 }
 #endif
 
-#endif
+#endif /* NAME_H */
+
+/**
+ * @}
+ */

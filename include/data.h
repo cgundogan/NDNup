@@ -79,7 +79,7 @@ static inline void data_create(ndn_data_t *data)
  * @brief       Encodes an Data message
  *
  * @param[out]  out      output buffer
- * @param[in]   intmsg   Data to encode into @p out
+ * @param[in]   data     Data to encode into @p out
  * @retval      0 on succes
  * @retval      -1 output buffer @p out was NULL
  * @retval      -2 @p data was NULL

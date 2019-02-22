@@ -92,6 +92,7 @@ int8_t buffer_write(buffer_write_t *nbuf, uint8_t in);
  *
  * @param[in,out] nbuf         Buffer to write into
  * @param[in]     block        Block to write to @p nbuf
+ * @param[in]     block_len    Actual length of @p block
  * @retval        0 on success
  * @retval        -1 on end of buffer
  */
@@ -102,6 +103,7 @@ int8_t buffer_write_block(buffer_write_t *nbuf, uint8_t *block, size_t block_len
  *
  * @param[in,out]   nbuf         Buffer to read from
  * @param[out]      block        Store read block to @p block
+ * @param[in]       block_len    Actual length of @p block
  * @retval          0 on success
  * @retval          -1 on end of buffer
  */
