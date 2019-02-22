@@ -7,7 +7,7 @@ int8_t buffer_read(buffer_read_t *nbuf, uint8_t *out)
 {
     uint8_t result;
 
-    if (nbuf->offset >= nbuf->length) {
+    if (nbuf->offset > nbuf->length) {
         return -1;
     }
 
@@ -20,7 +20,7 @@ int8_t buffer_read(buffer_read_t *nbuf, uint8_t *out)
 
 int8_t buffer_write(buffer_write_t *nbuf, uint8_t in)
 {
-    if (nbuf->offset >= nbuf->length) {
+    if (nbuf->offset > nbuf->length) {
         return -1;
     }
 
@@ -31,7 +31,7 @@ int8_t buffer_write(buffer_write_t *nbuf, uint8_t in)
 
 int8_t buffer_read_block(buffer_read_t *nbuf, uint8_t *block, size_t block_len)
 {
-    if ((nbuf->offset + block_len) >= nbuf->length) {
+    if ((nbuf->offset + block_len) > nbuf->length) {
         return -1;
     }
 
@@ -43,7 +43,7 @@ int8_t buffer_read_block(buffer_read_t *nbuf, uint8_t *block, size_t block_len)
 
 int8_t buffer_write_block(buffer_write_t *nbuf, uint8_t *block, size_t block_len)
 {
-    if ((nbuf->offset + block_len) >= nbuf->length) {
+    if ((nbuf->offset + block_len) > nbuf->length) {
         return -1;
     }
 
