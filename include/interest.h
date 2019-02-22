@@ -99,7 +99,7 @@ static size_t get_interest_size(const ndn_interest_t* interest)
 
     if (interest->lifetime_enabled) {
         /** size of lifetime */
-        size += 2 + nonnegative_int_length(interest->lifetime);
+        size += 2 + tlv_nonnegative_int_length(interest->lifetime);
     }
 
     return size;

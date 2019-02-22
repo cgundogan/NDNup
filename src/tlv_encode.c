@@ -68,13 +68,13 @@ int8_t nonnegative_int_encode(buffer_write_t *out, uint32_t value)
 int8_t tlv_nonnegative_int_encode(buffer_write_t *out, tlfield_t type, uint32_t value)
 {
     tlfield_encode(out, type);
-    tlfield_encode(out, nonnegative_int_length(value));
+    tlfield_encode(out, tlv_nonnegative_int_length(value));
     nonnegative_int_encode(out, value);
 
     return 0;
 }
 
-size_t nonnegative_int_length(uint32_t value)
+size_t tlv_nonnegative_int_length(uint32_t value)
 {
     if (value <= 0x000000FF) {
         return 1;

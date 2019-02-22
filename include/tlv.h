@@ -25,10 +25,18 @@
 
 #include "buffer.h"
 
+/**
+ * Defines the major version of the NDN packet specification NDNup 
+ * supports
+ */
 #ifndef TLV_MAJOR_VERSION
 #define TLV_MAJOR_VERSION 0
 #endif
 
+/**
+ * Defines the minor version of the NDN packet specification NDNup 
+ * supports
+ */
 #ifndef TLV_MINOR_VERSION
 #define TLV_MINOR_VERSION 3
 #endif
@@ -117,7 +125,7 @@ int8_t tlv_nonnegative_int_encode(buffer_write_t *out, tlfield_t type, uint32_t 
  * @param[in]   value   non-negative integer
  * @return      length in bytes of the encoded non-negative integer value
  */
-size_t nonnegative_int_length(uint32_t value);
+size_t tlv_nonnegative_int_length(uint32_t value);
 
 /**
  * @brief       Encodes a boolean value

@@ -7,11 +7,11 @@ static size_t metainfo_length(const ndn_data_t *data)
     size_t length = 0;
 
     if (data->contenttype_enabled) {
-        length += 2 + nonnegative_int_length(data->metainfo.contenttype);
+        length += 2 + tlv_nonnegative_int_length(data->metainfo.contenttype);
     }
 
     if (data->freshnessperiod_enabled) {
-        length += 2 + nonnegative_int_length(data->metainfo.freshnessperiod);
+        length += 2 + tlv_nonnegative_int_length(data->metainfo.freshnessperiod);
     }
 
     if (data->freshnessperiod_enabled) {
