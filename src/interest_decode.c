@@ -21,7 +21,8 @@ int8_t interest_decode(ndn_interest_t *interest, buffer_read_t *in)
                 /** check if the buffer actually contains an interest */
                 if (field == tlv_interest) {
                     /** read the length of the interest */
-                    uint32_t length = tlfield_decode(in, &field);
+                    tlfield_decode(in, &field);
+                    tlfield_t max_offset = in->offset + field;
 
                     /** read the name of the interest */
                     if ((result = tlfield_decode_name(in, &(interest->name))) == -1) {
@@ -29,7 +30,7 @@ int8_t interest_decode(ndn_interest_t *interest, buffer_read_t *in)
                     }
 
                     /** read the remaining fields */
-                    while (in->offset < in->length) {
+                    while (in->offset < max_offset) {
                         /** read type */
                         if((result = tlfield_decode(in, &field)) != 0) {
                             /** todo */
@@ -39,31 +40,30 @@ int8_t interest_decode(ndn_interest_t *interest, buffer_read_t *in)
                         // TODO: add error handling
 
                         if (field == tlv_nonce) {
-                            tlv_nonnegative_int_decode(in, &(interest->nonce));
+                            tlv_nonnegative_int_decode(in, (uint64_t *)&(interest->nonce));
                         }
-
-                        if (field == tlv_must_be_fresh) {
+                        else if (field == tlv_must_be_fresh) {
                             /** read length */
                             tlfield_decode(in, &field);
                             interest->must_be_fresh_enabled = 1;
                         }
-
-                        if (field == tlv_can_be_prefix) {
+                        else if (field == tlv_can_be_prefix) {
                             /** read length */
                             tlfield_decode(in, &field);
                             interest->can_be_prefix_enabled = 1;
                         }
-
-                        if (field == tlv_hop_limit) {
-                            tlv_nonnegative_int_decode(in, &(interest->hop_limit));
+                        else if (field == tlv_hop_limit) {
+                            tlv_nonnegative_int_decode(in, (uint64_t *)&(interest->hop_limit));
                             interest->hop_limit_enabled = 1;
                         }
-
-                        if (field == tlv_interest_lifetime) {
-                            tlv_nonnegative_int_decode(in, (uint64_t *)&(interest->nonce));
+                        else if (field == tlv_interest_lifetime) {
+                            tlv_nonnegative_int_decode(in, (uint64_t *)&(interest->lifetime));
                             interest->lifetime_enabled = 1;
                         }
-
+                        else {
+                            /* TODO */
+                            return -1;
+                        }
                     }
                 }
             }

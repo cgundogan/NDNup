@@ -121,3 +121,18 @@ void test_interest_decode_simple(void) {
     TEST_ASSERT_EQUAL_UINT8_ARRAY(simple_interest_buffer,buf.buffer, buf.offset);
     TEST_ASSERT_EQUAL_MEMORY(&simple_interest, &interest, sizeof(interest));
 }
+
+void test_interest_decode_complex(void) {
+    int8_t error = 0;
+    buffer_read_t buf;
+    ndn_interest_t interest;
+
+    buffer_init(&buf, complex_interest_buffer, sizeof(complex_interest_buffer) / sizeof(complex_interest_buffer[0]));
+
+    error = interest_decode(&interest, &buf);
+
+    TEST_ASSERT_EQUAL_INT8(0, error);
+    TEST_ASSERT_EQUAL_UINT(sizeof(complex_interest_buffer)/sizeof(complex_interest_buffer[0]), buf.offset);
+    TEST_ASSERT_EQUAL_UINT8_ARRAY(complex_interest_buffer,buf.buffer, buf.offset);
+    TEST_ASSERT_EQUAL_MEMORY(&complex_interest, &interest, sizeof(interest));
+}
