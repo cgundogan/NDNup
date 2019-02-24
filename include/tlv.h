@@ -104,15 +104,6 @@ int8_t tlfield_decode(buffer_read_t *in, tlfield_t *field);
  * @brief       Encodes a Non Negative Integer
  *
  * @param[out]  out     output buffer
- * @param[in]   value   number to encode
- * @retval      0 on succes
- */
-int8_t nonnegative_int_encode(buffer_write_t *out, uint32_t value);
-
-/**
- * @brief       Encodes a Non Negative Integer
- *
- * @param[out]  out     output buffer
  * @param[in]   type    type to encode
  * @param[in]   value   number to encode
  * @retval      0 on succes

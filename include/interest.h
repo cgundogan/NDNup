@@ -74,36 +74,13 @@ static inline void interest_create(ndn_interest_t *interest)
     memset(interest, 0, sizeof(ndn_interest_t));
 }
 
-static size_t get_interest_size(const ndn_interest_t* interest)
-{
-    size_t size = get_name_block_size(&(interest->name));
-
-    if (interest->can_be_prefix_enabled) {
-        size += 2;
-    }
-
-    if (interest->must_be_fresh_enabled){
-        size += 2;
-    }
-
-    if (interest->hop_limit_enabled) {
-        size += 3;
-    }
-
-    if (interest->parameters_enabled) {
-        size += get_block_size(tlv_parameters, interest->parameters.size);
-    }
-
-    /** size of nonce */
-    size += 6;
-
-    if (interest->lifetime_enabled) {
-        /** size of lifetime */
-        size += 2 + tlv_nonnegative_int_length(interest->lifetime);
-    }
-
-    return size;
-}
+/**
+ * @brief       Returns the length of an encoded Interest message in bytes
+ *
+ * @param[in]   interest   Interest messages
+ * @return      Length of the encoded message in bytes
+ */
+size_t interest_get_size(const ndn_interest_t* interest);
 
 /**
  * @brief       Encodes an Interest message

@@ -36,6 +36,37 @@ int8_t interest_lifetime_encode(buffer_write_t *out, uint32_t interest_lifetime)
     return result;
 }
 
+size_t interest_get_size(const ndn_interest_t* interest)
+{
+    size_t size = get_name_block_size(&(interest->name));
+
+    if (interest->can_be_prefix_enabled) {
+        size += 2;
+    }
+
+    if (interest->must_be_fresh_enabled){
+        size += 2;
+    }
+
+    if (interest->hop_limit_enabled) {
+        size += 3;
+    }
+
+    if (interest->parameters_enabled) {
+        size += get_block_size(tlv_parameters, interest->parameters.size);
+    }
+
+    /** size of nonce */
+    size += 6;
+
+    if (interest->lifetime_enabled) {
+        /** size of lifetime */
+        size += 2 + tlv_nonnegative_int_length(interest->lifetime);
+    }
+
+    return size;
+}
+
 int8_t interest_encode(buffer_write_t *out, ndn_interest_t *interest)
 {
     int8_t result = -1;
@@ -44,7 +75,7 @@ int8_t interest_encode(buffer_write_t *out, ndn_interest_t *interest)
         result = -2;
 
         if (interest) {
-            int size = get_interest_size(interest);
+            int size = interest_get_size(interest);
 
             /* write outer TLV */
             tlfield_encode(out, tlv_interest);
