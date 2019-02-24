@@ -72,7 +72,7 @@ static inline void interest_create(ndn_interest_t *interest)
 {
     /** initialize all fields of the interest with '0' */
     memset(interest, 0, sizeof(ndn_interest_t));
-};
+}
 
 static size_t get_interest_size(const ndn_interest_t* interest)
 {
@@ -103,7 +103,7 @@ static size_t get_interest_size(const ndn_interest_t* interest)
     }
 
     return size;
-};
+}
 
 /**
  * @brief       Encodes an Interest message

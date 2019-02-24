@@ -2,6 +2,11 @@
 #include "name.h"
 #include "component.h"
 
+size_t get_component_block_size(const ndn_component_t *component)
+{
+    return get_block_size(component->type, component->size);
+}
+
 size_t get_name_block_size(const ndn_name_t* name)
 {
     size_t result = 0;

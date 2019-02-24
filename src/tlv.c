@@ -19,7 +19,11 @@ int8_t tlfield_encode(buffer_write_t *out, tlfield_t field)
             result = 0;
         }
     }
+#ifdef NDNUP_64BIT
     else if (field < (1UL << 32)) {
+#else
+    else {
+#endif
         if (remaining >= 5) {
             buffer_write(out, (uint8_t)254);
             buffer_write(out, (uint8_t)((field & 0xFF000000UL) >> 24));
@@ -30,7 +34,7 @@ int8_t tlfield_encode(buffer_write_t *out, tlfield_t field)
         }
     }
 #ifdef NDNUP_64BIT
-    else if (field < (1UL << 64)) {
+    else {
         if (remaining >= 9) {
             buffer_write(out, (uint8_t)255);
             buffer_write(out, (uint8_t)((field & 0xFF00000000000000UL) >> 56));
