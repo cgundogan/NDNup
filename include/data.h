@@ -8,7 +8,7 @@
 
 /**
  * @file        data.h
- * @brief       Data structures and functions for NDN data messages
+ * @brief       Data structures and functions for NDN Data messages
  * @author      Cenk Gündoğan <cenk.guendogan@haw-hamburg.de>
  * @copyright   MIT License
  * @addtogroup  Decoder
@@ -39,24 +39,29 @@ extern "C" {
 #endif
 
 /**
- * Representation of the MetaInfo TLV
+ * @brief Representation of the MetaInfo TLV
+ * @{
  */
 typedef struct {
     tlfield_t contenttype;              /**< content type */
     tlfield_t freshnessperiod;          /**< period the data is marked as fresh */
     ndn_component_t finalblockid;       /**< indicating the final name component */
 } ndn_data_metainfo_t;
+/** @} */
 
 /**
- * Representation of the Content TLV
+ * @brief Representation of the Content TLV
+ * @{
  */
 typedef struct {
     uint8_t value[DATA_CONTENT_LENGTH];  /**< actual content */
     size_t length;                       /**< length of the content */
 } ndn_data_content_t;
+/** @} */
 
 /**
- * Representation of a Data message
+ * @brief NDN Data message
+ * @{
  */
 typedef struct {
     ndn_name_t name;                       /**< name of the data */
@@ -68,6 +73,7 @@ typedef struct {
     uint8_t finalblockid_enabled :1;       /**< indicates if @ref metainfo::finalblockid is set */
     uint8_t content_enabled :1;            /**< indicates if @ref content is set */
 } ndn_data_t;
+/** @} */
 
 static inline void data_create(ndn_data_t *data)
 {

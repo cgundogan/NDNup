@@ -40,7 +40,7 @@ extern "C" {
 
 /**
  * @brief NDN Interest parameters element
- * {@
+ * @{
  */
 typedef struct interest_params {
   uint8_t value[NDN_INTEREST_PARAMETERS_BUFFER_SIZE]; /**< actual interest parameters */
