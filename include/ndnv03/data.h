@@ -7,7 +7,7 @@
  */
 
 /**
- * @file        ndnv03_data.h
+ * @file        data.h
  * @brief       Data structures and functions for NDN Data messages
  * @author      Cenk Gündoğan <cenk.guendogan@haw-hamburg.de>
  * @copyright   MIT License
@@ -21,11 +21,11 @@
 #include <stdint.h>
 #include <string.h>
 
-#include "tlv.h"
-#include "name.h"
-#include "helper.h"
-#include "constants.h"
-#include "buffer.h"
+#include "ndnv03/tlv.h"
+#include "ndnv03/name.h"
+#include "ndnv03/helper.h"
+#include "ndnv03/constants.h"
+#include "ndnv03/buffer.h"
 
 #ifdef __cplusplus
 extern "C" {

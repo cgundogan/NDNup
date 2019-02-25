@@ -1,6 +1,6 @@
-#include "tlv.h"
-#include "ndnv03_data.h"
-#include "name.h"
+#include "ndnv03/tlv.h"
+#include "ndnv03/data.h"
+#include "ndnv03/name.h"
 
 static size_t metainfo_length(const ndnv03_data_t *data)
 {

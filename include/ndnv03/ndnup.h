@@ -21,9 +21,9 @@
 #include <stdio.h>
 #include <stdint.h>
 
-#include "tlv.h"
-#include "buffer.h"
-#include "ndnv03_interest.h"
+#include "ndnv03/tlv.h"
+#include "ndnv03/buffer.h"
+#include "ndnv03/interest.h"
 
 #endif /* NDNUP_H */
 

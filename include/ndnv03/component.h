@@ -21,9 +21,9 @@
 #include <limits.h>
 #include <stdint.h>
 
-#include "tlv.h"
-#include "helper.h"
-#include "constants.h"
+#include "ndnv03/tlv.h"
+#include "ndnv03/helper.h"
+#include "ndnv03/constants.h"
 
 #ifdef __cplusplus
 extern "C" {

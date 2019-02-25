@@ -4,8 +4,8 @@
  */
 
 #include "unity.h"
-#include "ndnup.h"
-#include "ndnv03_data.h"
+#include "ndnv03/ndnup.h"
+#include "ndnv03/data.h"
 
 static uint8_t buffer[128];
 

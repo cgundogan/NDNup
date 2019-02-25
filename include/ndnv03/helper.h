@@ -21,7 +21,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 
-#include "buffer.h"
+#include "ndnv03/buffer.h"
 
 #ifdef __cplusplus
 extern "C" {

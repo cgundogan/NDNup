@@ -7,7 +7,7 @@
  */
 
 /**
- * @file        ndnv03_interest.h
+ * @file        interest.h
  * @brief       Data structures and functions for NDN Interest messages
  * @author      Michael Frey <michael.frey@safetyio.com>
  * @copyright   MIT License
@@ -21,11 +21,11 @@
 #include <stdint.h>
 #include <string.h>
 
-#include "tlv.h"
-#include "name.h"
-#include "helper.h"
-#include "constants.h"
-#include "buffer.h"
+#include "ndnv03/tlv.h"
+#include "ndnv03/name.h"
+#include "ndnv03/helper.h"
+#include "ndnv03/constants.h"
+#include "ndnv03/buffer.h"
 
 /**
  * The default lifetime of an Interest packet in milliseconds.

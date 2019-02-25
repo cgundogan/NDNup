@@ -1,6 +1,6 @@
-#include "tlv.h"
-#include "name.h"
-#include "component.h"
+#include "ndnv03/tlv.h"
+#include "ndnv03/name.h"
+#include "ndnv03/component.h"
 
 size_t get_component_block_size(const ndn_component_t *component)
 {

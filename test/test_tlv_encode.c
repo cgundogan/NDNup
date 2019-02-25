@@ -4,7 +4,7 @@
  */
 
 #include "unity.h"
-#include "ndnup.h"
+#include "ndnv03/ndnup.h"
 
 void test_tlv_decode_1byte(void)
 {

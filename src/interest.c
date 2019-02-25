@@ -1,6 +1,6 @@
-#include "tlv.h"
-#include "ndnv03_interest.h"
-#include "name.h"
+#include "ndnv03/tlv.h"
+#include "ndnv03/interest.h"
+#include "ndnv03/name.h"
 
 int8_t nonce_encode(buffer_write_t *out, uint32_t nonce)
 {
