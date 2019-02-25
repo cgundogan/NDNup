@@ -8,7 +8,7 @@
 
 /**
  * @file        interest.h
- * @brief       Data structures and functions for NDN interests
+ * @brief       Data structures and functions for NDN Interest messages
  * @author      Michael Frey <michael.frey@safetyio.com>
  * @copyright   MIT License
  * @addtogroup  NDNup Minimal Standalone NDN Packet Parser
@@ -27,6 +27,9 @@
 #include "constants.h"
 #include "buffer.h"
 
+/**
+ * The default lifetime of an Interest packet in milliseconds.
+ */
 #ifndef INTEREST_DEFAULT_LIFETIME
 #define INTEREST_DEFAULT_LIFETIME (4000u)
 #endif
@@ -36,15 +39,18 @@ extern "C" {
 #endif
 
 /**
- * The structure to represent the Interest parameters element.
+ * @brief NDN Interest parameters element
+ * {@
  */
 typedef struct interest_params {
-  uint8_t value[NDN_INTEREST_PARAMETERS_BUFFER_SIZE];
-  uint32_t size;
+  uint8_t value[NDN_INTEREST_PARAMETERS_BUFFER_SIZE]; /**< actual interest parameters */
+  uint32_t size;                                      /**< overall size of the interest parameters */
 } interest_params_t;
+/** @} */
 
 /**
- * Representation of a Interest message
+ * @brief NDN Interest message
+ * @{
  */
 typedef struct ndn_interest {
     ndn_name_t name;               /**< name of the interest */
@@ -66,6 +72,7 @@ typedef struct ndn_interest {
     uint8_t parameters_enabled :1;    /**< indicates if parameters field is set */
     uint8_t hop_limit_enabled :1;     /**< indicates if field @ref hop_limit is set */
 } ndn_interest_t;
+/** @} */
 
 
 static inline void interest_create(ndn_interest_t *interest)

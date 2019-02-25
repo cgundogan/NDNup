@@ -70,13 +70,15 @@ extern "C" {
 #endif
 
 /**
- *
+ * @brief NDN name component
+ * @{
  */
 typedef struct ndn_component {
-   tlfield_t type;                          /**< the type of the component */
+   tlfield_t type;                                /**< the type of the component */
    uint8_t value[NDN_NAME_COMPONENT_BUFFER_SIZE]; /**< the actual value the component holds */
    uint32_t size;                                 /**< the actual size of the component buffer */
 } ndn_component_t;
+/** @} */
 
 size_t get_component_block_size(const ndn_component_t *component);
 
