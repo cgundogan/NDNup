@@ -1,8 +1,8 @@
 #include "tlv.h"
-#include "data.h"
+#include "ndnv03_data.h"
 #include "name.h"
 
-static size_t metainfo_length(const ndn_data_t *data)
+static size_t metainfo_length(const ndnv03_data_t *data)
 {
     size_t length = 0;
 
@@ -21,7 +21,7 @@ static size_t metainfo_length(const ndn_data_t *data)
     return length;
 }
 
-static int8_t metainfo_encode(buffer_write_t *out, const ndn_data_t *data)
+static int8_t metainfo_encode(buffer_write_t *out, const ndnv03_data_t *data)
 {
     int8_t result = 0;
 
@@ -50,7 +50,7 @@ static int8_t content_encode(buffer_write_t *out, const ndn_data_content_t *cont
     return 0;
 }
 
-size_t get_data_size(const ndn_data_t* data)
+size_t get_data_size(const ndnv03_data_t* data)
 {
     size_t size = get_name_block_size(&(data->name));
     if (data->metainfo_enabled) {
@@ -62,7 +62,7 @@ size_t get_data_size(const ndn_data_t* data)
     return size;
 }
 
-int8_t data_encode(buffer_write_t *out, ndn_data_t *data)
+int8_t data_encode(buffer_write_t *out, ndnv03_data_t *data)
 {
     int8_t result = -1;
 
@@ -95,7 +95,7 @@ int8_t data_encode(buffer_write_t *out, ndn_data_t *data)
     return result;
 }
 
-static int8_t metainfo_decode(ndn_data_t *data, buffer_read_t *in)
+static int8_t metainfo_decode(ndnv03_data_t *data, buffer_read_t *in)
 {
     int8_t result = 0;
     tlfield_t length = 0;
@@ -141,7 +141,7 @@ static int8_t content_decode(ndn_data_content_t *content, buffer_read_t *in)
    return 0;
 }
 
-int8_t data_decode(ndn_data_t *data, buffer_read_t *in)
+int8_t data_decode(ndnv03_data_t *data, buffer_read_t *in)
 {
     int8_t result = -1;
 

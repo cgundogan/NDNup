@@ -5,11 +5,11 @@
 
 #include "unity.h"
 #include "ndnup.h"
-#include "data.h"
+#include "ndnv03_data.h"
 
 static uint8_t buffer[128];
 
-static ndn_data_t simple_data = {
+static ndnv03_data_t simple_data = {
     .name =
         {
             .components = {{.type = tlv_generic_name_component,
@@ -37,7 +37,7 @@ static uint8_t simple_data_buffer[] = {
     0x08, 0x03, 0x6d, 0x73, 0x61,
 };
 
-static ndn_data_t complex_data = {
+static ndnv03_data_t complex_data = {
     .name = {
         .components = {{.type = tlv_generic_name_component,
                         .size = 3,
@@ -110,7 +110,7 @@ void test_data_encode_complex(void) {
 void test_data_decode_simple(void) {
     int8_t error = 0;
     buffer_read_t buf;
-    ndn_data_t data;
+    ndnv03_data_t data;
 
     buffer_init(&buf, simple_data_buffer, sizeof(simple_data_buffer) / sizeof(simple_data_buffer[0]));
 
@@ -125,7 +125,7 @@ void test_data_decode_simple(void) {
 void test_data_decode_complex(void) {
     int8_t error = 0;
     buffer_read_t buf;
-    ndn_data_t data;
+    ndnv03_data_t data;
 
     buffer_init(&buf, complex_data_buffer, sizeof(complex_data_buffer) / sizeof(complex_data_buffer[0]));
 

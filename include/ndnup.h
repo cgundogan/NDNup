@@ -23,7 +23,7 @@
 
 #include "tlv.h"
 #include "buffer.h"
-#include "interest.h"
+#include "ndnv03_interest.h"
 
 #endif /* NDNUP_H */
 

@@ -5,11 +5,11 @@
 
 #include "unity.h"
 #include "ndnup.h"
-#include "interest.h"
+#include "ndnv03_interest.h"
 
 static uint8_t buffer[128];
 
-static ndn_interest_t simple_interest = {
+static ndnv03_interest_t simple_interest = {
     .name =
         {
             .components = {{.type = tlv_generic_name_component,
@@ -40,7 +40,7 @@ static uint8_t simple_interest_buffer[] = {
     0x0A, 0x04, 0x00, 0x00, 0x00, 0xFF,
 };
 
-static ndn_interest_t complex_interest = {
+static ndnv03_interest_t complex_interest = {
     .name =
         {
             .components = {{.type = tlv_generic_name_component,
@@ -110,7 +110,7 @@ void test_interest_encode_complex(void) {
 void test_interest_decode_simple(void) {
     int8_t error = 0;
     buffer_read_t buf;
-    ndn_interest_t interest;
+    ndnv03_interest_t interest;
 
     buffer_init(&buf, simple_interest_buffer, sizeof(simple_interest_buffer) / sizeof(simple_interest_buffer[0]));
 
@@ -125,7 +125,7 @@ void test_interest_decode_simple(void) {
 void test_interest_decode_complex(void) {
     int8_t error = 0;
     buffer_read_t buf;
-    ndn_interest_t interest;
+    ndnv03_interest_t interest;
 
     buffer_init(&buf, complex_interest_buffer, sizeof(complex_interest_buffer) / sizeof(complex_interest_buffer[0]));
 
